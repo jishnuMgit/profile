@@ -329,7 +329,7 @@ svg {
 .home__social-linK {
   display: flex;
   background-color: var(--first-color-alt);
-  padding: .5rem;
+  padding: 1rem;
   color: var(--title-color);
   font-size: 1.5rem;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -339,6 +339,7 @@ svg {
 .home__social-linK:hover {
   transform: translateY(-.25rem);
 }
+
 
 .home__image {
   justify-self: center;
@@ -1091,7 +1092,7 @@ svg {
   position: relative;
   padding-left: 1.5rem;
   margin-bottom: 0.75rem;
-  color: var(--first-color);
+  color: white;
   font-size: 0.95rem;
 }
 
@@ -1122,4 +1123,13 @@ svg {
   .developer__container {
     grid-template-columns: 1fr;
   }
+}
+.about__list {
+  list-style: disc;
+  margin-left: 1.5rem;
+  line-height: 1.8;
+}
+.about__education,
+.about__certifications {
+  margin-top: 2rem;
 }
