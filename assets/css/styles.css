@@ -1133,3 +1133,83 @@ svg {
 .about__certifications {
   margin-top: 2rem;
 }
+/* ======================== */
+
+
+.main-content {
+  padding-top: 3rem;
+ 
+}
+
+.section__title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.project {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.5rem;
+   padding-left: 10px;
+}
+
+.project__image {
+  max-width: 300px;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.project__info {
+  flex: 1;
+  min-width: 250px;
+}
+
+.project__info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid #ddd;
+}
+
+.footer__social a {
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.project__links {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.project__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #444;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.project__btn:hover {
+  background-color: #444;
+  color: #fff;
+}
+

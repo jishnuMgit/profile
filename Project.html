@@ -1,520 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jishnu M - Portfolio</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
 <body>
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav__logo">
-                JISHNU <span>M</span>
-            </a>
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="/index.html" class="nav__link">Back to HOME</a>
-                    </li>
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="/index.html" class="nav__logo">JISHNU <span>M</span></a>
+      <ul class="nav__list">
+        <li><a href="/index.html" class="nav__link">Home</a></li>
+      </ul>
+      <div class="nav__toggle" id="nav-toggle"><i class="ri-menu-line"></i></div>
+    </nav>
+  </header>
 
+  <main class="main-content">
+    <section class="projects section container">
+      <h2 class="section__title">My Projects</h2>
 
-                    <!-- <li>
-                        <a href="" style="background-color: blue; color: white; border-radius: 10px; padding: 10px;">BLUE</a>
-                    </li> -->
-
-
-                    <div class="nav__close" id="nav-close">
-                        <i class="ri-close-large-line"></i>
-                    </div>
-            </div>
-            <div class="nav__toggle" id="nav-toggle">
-                <i class="ri-menu-line"></i>
-            </div>
-        </nav>
-    </header>
-
-    <section class="developer section" id="about">
-        <div class="developer__container container grid">
-            <!-- Left Side: Text Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>1</span>
-                </h3>
-                <h2 class="section__title">Nike Website Clone</h2>
-                <p class="developer__description">
-                    I developed a fully responsive <strong>Nike website frontend</strong> using <strong>HTML5</strong>
-                    and
-                    <strong>CSS3</strong>. The design replicates a modern landing page experience inspired by Nike’s
-                    official
-                    website, focusing on sleek layout, clean typography, and bold imagery.
-                </p>
-
-                <ul class="developer__list">
-                    <li>⚡ Hero section with featured product and CTA button</li>
-                    <li>🧭 Navigation bar with logo and links</li>
-                    <li>🛍️ Product highlight cards</li>
-                    <li>🎯 Promotional banners</li>
-                    <li>📱 Fully responsive layout for mobile, tablet, and desktop</li>
-                    <li>✨ Smooth hover effects and transitions</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project helped me enhance my knowledge in <strong>HTML structure</strong>,
-                    <strong>Flexbox/Grid layouts</strong>, <strong>responsive design</strong>, and
-                    <strong>modern CSS styling techniques</strong>.
-                </p>
-            </div>
-
-
-            <!-- Right Side: Image -->
-            <div class="developer__image">
-                <img src="./assets/img/Screenshot 2024-05-20 145352.png" alt="About Me Image" />
-            </div>
+      <!-- Project 1 -->
+      <div class="project">
+        <img src="./assets/img/Screenshot 2024-05-20 145352.png" alt="Nike Clone" class="project__image" />
+        <div class="project__info">
+          <h3>Nike Website Clone</h3>
+          <p>Responsive Nike-inspired landing page using HTML & CSS.</p>
+          <div class="project__links">
+            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+            <a href="https://github.com/jishnuMgit/nike" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-
-        <div class="developer__container container grid">
-            <!-- Left Side: Image -->
-            <div class="developer__image">
-                <img src="./assets/img/Screenshot 2024-05-20 145352.png.png" alt="Netflix Clone Preview" />
-            </div>
-
-            <!-- Right Side: Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>2</span>
-                </h3>
-                <h2 class="section__title">Netflix Website Clone</h2>
-                <p class="developer__description">
-                    I built a fully functional <strong>Netflix clone</strong> using <strong>React.js</strong>, focusing
-                    on UI/UX
-                    precision and component-based architecture. The application mimics the look and feel of the real
-                    Netflix site,
-                    offering a modern and responsive user interface.
-                </p>
-
-                <ul class="developer__list">
-                    <li>🎬 Movie/TV show banners and thumbnails with hover animations</li>
-                    <li>📺 Featured shows section with dynamic content rendering</li>
-                    <li>🔍 Search functionality using TMDb API</li>
-                    <li>⚙️ React functional components and props structure</li>
-                    <li>📱 Responsive layout using CSS Flexbox and Grid</li>
-                    <li>💡 Clean UI inspired by Netflix with dark theme design</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project strengthened my skills in <strong>React components</strong>,
-                    <strong>API integration</strong>, <strong>state management</strong>, and
-                    <strong>building scalable single-page applications (SPAs)</strong>.
-                </p>
-            </div>
+      <!-- Project 2 -->
+      <div class="project">
+        <img src="./assets/img/Screenshot 2024-05-20 145352.png.png" alt="Netflix Clone" class="project__image" />
+        <div class="project__info">
+          <h3>Netflix Website Clone</h3>
+          <p>React-based clone with TMDb API, UI/UX animations.</p>
+          <div class="project__links">
+            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+            <a href="https://github.com/jishnuMgit/Netflixs" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-
-
-        <div class="developer__container container grid">
-
-            <!-- Left Side: Text Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>3</span>
-                </h3>
-                <h2 class="section__title">Full-Stack E-Commerce Web App</h2>
-                <p class="developer__description">
-                    I developed a fully functional <strong>E-Commerce website</strong> using the <strong>MERN
-                        stack</strong>
-                    (MongoDB, Express.js, React.js, Node.js). This project simulates a real online shopping experience
-                    with dynamic product listings, user authentication, and cart management.
-                </p>
-
-                <ul class="developer__list">
-                    <li>🛍️ Product listing with filtering, sorting, and categories</li>
-                    <li>👤 User registration, login, and authentication with JWT</li>
-                    <li>🛒 Cart and checkout functionality with quantity control</li>
-                    <li>💾 Product data and user info stored in MongoDB</li>
-                    <li>⚙️ Backend API built using Express and Node.js</li>
-                    <li>📱 Fully responsive UI built using React.js and Tailwind CSS</li>
-                    <li>☁️ Image upload functionality with Cloudinary integration</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project improved my proficiency in <strong>RESTful API development</strong>,
-                    <strong>frontend-backend integration</strong>, <strong>MongoDB data modeling</strong>,
-                    and <strong>React component design</strong>. It also gave me hands-on experience with
-                    <strong>authentication, state management, and deployment best practices</strong>.
-                </p>
-            </div>
-
-            <!-- Right Side: Image -->
-            <div class="developer__image">
-                <img src="./assets/img/pj2.png" alt="E-Commerce Website Preview" />
-            </div>
-
+      <!-- Project 3 -->
+      <div class="project">
+        <img src="./assets/img/pj2.png" alt="E-commerce" class="project__image" />
+        <div class="project__info">
+          <h3>E-Commerce Web App (MERN)</h3>
+          <p>Full-stack shop site with authentication and cart system.</p>
+          <div class="project__links">
+            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+            <a href="https://github.com/jishnuMgit/mern-ecommerce" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-
-
-
-
-        <div class="developer__container container grid">
-            <!-- Left Side: Image -->
-            <div class="developer__image">
-                <img src="./assets/img/pj3.png" alt="Advanced To-Do App Preview" />
-            </div>
-
-            <!-- Right Side: Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>4</span>
-                </h3>
-                <h2 class="section__title">Advanced To-Do List Web App (React)</h2>
-                <p class="developer__description">
-                    I developed an <strong>Advanced To-Do List application</strong> using <strong>React.js</strong>,
-                    combining a powerful task management system with a modern and intuitive user interface. This project
-                    focuses on component reusability, state management, and local data persistence.
-                </p>
-
-                <ul class="developer__list">
-                    <li>📝 Add, edit, and delete tasks with real-time updates</li>
-                    <li>📅 Set due dates and priorities for tasks</li>
-                    <li>✅ Mark tasks as completed with toggle</li>
-                    <li>🔍 Filter tasks by status and priority</li>
-                    <li>💾 Data persistence using <strong>Local Storage</strong></li>
-                    <li>🧩 Modular component structure for reusability</li>
-                    <li>📱 Fully responsive UI using CSS modules/Flexbox</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project helped me master <strong>React Hooks</strong> like <code>useState</code> and
-                    <code>useEffect</code>, while enhancing my understanding of <strong>component design</strong>,
-                    <strong>form handling</strong>, and <strong>real-world state management</strong>.
-                </p>
-            </div>
+      <!-- Project 4 -->
+      <div class="project">
+        <img src="./assets/img/pj3.png" alt="To-Do App" class="project__image" />
+        <div class="project__info">
+          <h3>Advanced To-Do App (React)</h3>
+          <p>Task manager with filters, local storage, and modular UI.</p>
+          <div class="project__links">
+            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+            <a href="https://github.com/jishnuMgit/todo" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-        <div class="developer__container container grid">
-            <!-- Left Side: Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>5</span>
-                </h3>
-                <h2 class="section__title">Simple Twitter Clone (MERN Stack)</h2>
-                <p class="developer__description">
-                    I created a <strong>basic Twitter clone</strong> using the <strong>MERN stack</strong> (MongoDB,
-                    Express.js, React.js, Node.js). The app replicates core Twitter functionalities, allowing users to
-                    register, log in, and share short posts.
-                </p>
-
-                <ul class="developer__list">
-                    <li>📝 Post tweets (text-based) with real-time rendering</li>
-                    <li>💬 Comment on posts with dynamic loading</li>
-                    <li>🔐 User signup/login with JWT authentication</li>
-                    <li>👤 User profiles with post filtering</li>
-                    <li>💾 MongoDB for storing users, posts, and comments</li>
-                    <li>⚙️ Backend built with Express and Node.js</li>
-                    <li>🧩 React frontend using functional components and hooks</li>
-                    <li>📱 Fully responsive design using Tailwind CSS</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project improved my skills in <strong>authentication</strong>,
-                    <strong>CRUD operations</strong>, <strong>React state management</strong>, and <strong>RESTful API
-                        integration</strong>. It also gave me experience building a basic social media app structure.
-                </p>
-            </div>
-
-            <!-- Right Side: Image -->
-            <div class="developer__image">
-                <img src="./assets/img/pj1.png" alt="Twitter Clone Preview" />
-            </div>
+      <!-- Project 5 -->
+      <div class="project">
+        <img src="./assets/img/pj1.png" alt="Twitter Clone" class="project__image" />
+        <div class="project__info">
+          <h3>Twitter Clone (MERN)</h3>
+          <p>Post tweets, comment, and manage user profiles with JWT.</p>
+          <div class="project__links">
+            <a href="https://twitter-front.onrender.com/" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
+            <a href="https://github.com/jishnuMgit/twitter-clone" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-
-        <div class="developer__container container grid">
-            <!-- Left Side: Content -->
-            <div class="developer__image">
-                <img src="./assets/img/img1/Screenshot 2024-12-19 092352.png" alt="Unique Code Generator Preview" />
-            </div>
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>6</span>
-                </h3>
-                <h2 class="section__title">Unique Code Generator for Rootment Company (MERN)</h2>
-                <p class="developer__description">
-                    I built a <strong>Unique Code Generator system</strong> for <strong>Rootment Company</strong> using
-                    the
-                    <strong>MERN stack</strong>. This tool generates secure, non-repeating alphanumeric codes for
-                    internal use,
-                    useful in inventory, authentication, and voucher systems.
-                </p>
-
-                <ul class="developer__list">
-                    <li>🔑 Generates unique, secure alphanumeric codes on-demand</li>
-                    <li>🧮 Optional length and format customization</li>
-                    <li>💾 Stores generated codes in <strong>MongoDB</strong> to avoid duplication</li>
-                    <li>🔄 Real-time code generation via API using <strong>Node.js</strong> and <strong>Express</strong>
-                    </li>
-                    <li>🧠 React frontend with copy-to-clipboard and filter/search options</li>
-                    <li>🔐 Secured endpoints with basic admin access control</li>
-                    <li>📦 Download codes in CSV format for external use</li>
-                    <li>📱 Responsive UI using Tailwind CSS</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project helped me understand <strong>randomized logic</strong>, <strong>backend
-                        validation</strong>,
-                    <strong>MongoDB queries</strong>, and <strong>secure API practices</strong>. It also gave me
-                    experience with
-                    <strong>admin tool development</strong> and frontend/backend synchronization.
-                </p>
-            </div>
-
-            <!-- Right Side: Image -->
-
+      <!-- Project 6 -->
+      <div class="project">
+        <img src="./assets/img/img1/Screenshot 2024-12-19 092352.png" alt="Code Generator" class="project__image" />
+        <div class="project__info">
+          <h3>Unique Code Generator</h3>
+          <p>Secure alphanumeric generator with MongoDB storage.</p>
+          <div class="project__links">
+            <a href="http://warehouse.rootments.live/" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
+            <a href="https://github.com/jishnuMgit/UniCode" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-        <div class="developer__container container grid">
-            <!-- Left Side: Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>7</span>
-                </h3>
-                <h2 class="section__title">Employee Training LMS for Rootment (MERN)</h2>
-                <p class="developer__description">
-                    I developed a <strong>custom Learning Management System (LMS)</strong> for <strong>Rootment
-                        Company</strong> using the
-                    <strong>MERN stack</strong>. It allows employees to complete training modules, watch videos, take
-                    assessments,
-                    and track their progress within the platform.
-                </p>
-
-                <ul class="developer__list">
-                    <li>🎥 Integrated training videos module-by-module</li>
-                    <li>📝 Built-in MCQ-based assessments after each module</li>
-                    <li>📊 User progress tracking with dynamic progress bars</li>
-                    <li>🔁 Auto-escalation notifications (4 levels) for incomplete training</li>
-                    <li>🔐 Secure user login and role-based access for employees and admins</li>
-                    <li>📁 MongoDB for storing users, training modules, questions, and scores</li>
-                    <li>📩 Notification system using cron jobs and escalation logic</li>
-                    <li>📱 Fully responsive interface built with React and Tailwind CSS</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project enhanced my skills in <strong>real-world user management</strong>,
-                    <strong>stateful progress tracking</strong>, <strong>notification systems</strong>, and advanced
-                    <strong>backend scheduling with cron jobs</strong>. It’s a complete solution designed to streamline
-                    Rootment’s
-                    internal training process.
-                </p>
-            </div>
-
-            <!-- Right Side: Image -->
-            <div class="developer__image">
-                <img src="./assets/img/img1/Screenshot 2025-01-11 171505.png" alt="LMS Rootment Preview" />
-            </div>
+      <!-- Project 7 -->
+      <div class="project">
+        <img src="./assets/img/img1/Screenshot 2025-01-11 171505.png" alt="LMS" class="project__image" />
+        <div class="project__info">
+          <h3>Employee LMS (MERN)</h3>
+          <p>Training modules, progress tracking, and auto-escalations.</p>
+          <div class="project__links">
+            <a href="https://lms.rootments.live/" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
+            <a href="https://github.com/jishnuMgit/LMS" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-
-        <div class="developer__container container grid">
-            <!-- Left Side: Content -->
-            <div class="developer__image">
-                <img src="./assets/img/img1/Screenshot 2025-04-07 161912.png" alt="Suitor Guy Website Preview" />
-            </div>
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>8</span>
-                </h3>
-                <h2 class="section__title">Suitor Guy – Brand Website (React)</h2>
-                <p class="developer__description">
-                    I developed the <strong>Suitor Guy</strong> brand website for <strong>Rootment Company</strong>
-                    using
-                    <strong>React.js</strong>. The site presents their premium men’s fashion line with an elegant,
-                    mobile-friendly interface
-                    and smooth user experience optimized for branding and conversions.
-                </p>
-
-                <ul class="developer__list">
-                    <li>🎨 Clean and modern UI/UX showcasing the brand identity</li>
-                    <li>📸 Product highlights with hover effects and dynamic carousels</li>
-                    <li>🧭 Smooth page transitions using React Router</li>
-                    <li>🧩 Modular component architecture for scalability</li>
-                    <li>📱 Fully responsive across all devices using Tailwind CSS</li>
-                    <li>🛒 CTA sections for product inquiries and lookbook access</li>
-                    <li>🌐 SEO-friendly design with optimized metadata</li>
-                    <li>🚀 Deployed for production with performance best practices</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project enhanced my frontend design skills and gave me experience delivering a
-                    <strong>branded web presence</strong> using <strong>React</strong> and <strong>Tailwind
-                        CSS</strong>, with a
-                    focus on <strong>client satisfaction</strong> and <strong>visual storytelling</strong>.
-                </p>
-            </div>
-
-            <!-- Right Side: Image -->
-
+      <!-- Project 8 -->
+      <div class="project">
+        <img src="./assets/img/img1/Screenshot 2025-04-07 161912.png" alt="Suitor Guy" class="project__image" />
+        <div class="project__info">
+          <h3>Suitor Guy Website</h3>
+          <p>React site for a men’s fashion brand with sleek UI.</p>
+          <div class="project__links">
+            <a href="https://suitorguy.com/" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
+            <a href="https://github.com/jishnuMgit/suitorguy" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-
-        <div class="developer__container container grid">
-            <!-- Left Side: Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>9</span>
-                </h3>
-                <h2 class="section__title">Financial Management System for Rootment (MERN)</h2>
-                <p class="developer__description">
-                    I built a <strong>custom financial software</strong> for <strong>Rootment Company</strong> using the
-                    <strong>MERN stack</strong>. This platform allows Rootment to manage their internal financial
-                    transactions,
-                    budgeting, expense tracking, and financial reporting in a secure, user-friendly interface.
-                </p>
-
-                <ul class="developer__list">
-                    <li>💸 Add and track income/expenses with category tagging</li>
-                    <li>📊 Dynamic dashboards with charts for budget insights</li>
-                    <li>🔍 Filter and search by date range, category, or transaction type</li>
-                    <li>🧮 Real-time balance calculation and alerts for over-budget items</li>
-                    <li>📝 Monthly report generation and download (PDF/CSV)</li>
-                    <li>🔐 Secure login with JWT and role-based access control</li>
-                    <li>💾 MongoDB for persistent storage of financial data</li>
-                    <li>📱 Fully responsive interface using React and Tailwind CSS</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project improved my experience in <strong>secure data handling</strong>,
-                    <strong>financial logic implementation</strong>, and creating interactive
-                    <strong>data visualizations</strong> using libraries like Chart.js. It’s a powerful tool tailored
-                    for Rootment's internal accounting workflows.
-                </p>
-            </div>
-
-            <!-- Right Side: Image -->
-            <div class="developer__image">
-                <img src="./assets/img/img1/Screenshot 2025-04-07 124641.png" alt="Financial Software Preview" />
-            </div>
+      <!-- Project 9 -->
+      <div class="project">
+        <img src="./assets/img/img1/Screenshot 2025-04-07 124641.png" alt="Financial System" class="project__image" />
+        <div class="project__info">
+          <h3>Financial System (MERN)</h3>
+          <p>Track expenses, generate reports, and manage finances.</p>
+          <div class="project__links">
+            <a href="https://rootfin.rootments.live/" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
+            <a href="https://github.com/jishnuMgit/rootfin" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
+          </div>
         </div>
+      </div>
 
-        <div class="developer__container container grid">
-            <div class="developer__image">
-                <img src="./assets/img/Screenshot 2024-06-01 201000.png" alt="Simple Calculator Preview" />
-            </div>
-            <!-- Left Side: Text Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>10</span>
-                </h3>
-                <h2 class="section__title">Simple Calculator</h2>
-                <p class="developer__description">
-                    I developed a <strong>simple calculator web app</strong> using <strong>HTML</strong>,
-                    <strong>CSS</strong>, and <strong>JavaScript</strong>. This calculator allows users to perform
-                    basic arithmetic operations with a clean and user-friendly interface.
-                </p>
-
-                <ul class="developer__list">
-                    <li>➕ Basic operations: addition, subtraction, multiplication, and division</li>
-                    <li>📲 Responsive layout suitable for mobile and desktop</li>
-                    <li>⌨️ Button-based input system with clear and delete functionality</li>
-                    <li>⚡ Instant output display and real-time calculation</li>
-                    <li>💡 Error handling for invalid operations</li>
-                    <li>🎨 Minimal and modern UI using custom CSS styling</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project enhanced my skills in <strong>JavaScript logic building</strong>,
-                    <strong>event handling</strong>, and <strong>DOM manipulation</strong>, while also helping me design
-                    an
-                    intuitive user interface.
-                </p>
-            </div>
-
-            <!-- Right Side: Image -->
-
+      <!-- Project 10 -->
+      <div class="project">
+        <img src="./assets/img/Screenshot 2024-06-01 201000.png" alt="Calculator" class="project__image" />
+        <div class="project__info">
+          <h3>Simple Calculator</h3>
+          <p>Basic calculator with JavaScript and responsive layout.</p>
+          <div class="project__links">
+            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
+            <a href="#" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a> -->
+          </div>
         </div>
+      </div>
 
-        <div class="developer__container container grid">
-            <!-- Left Side: Text Content -->
-            <div class="developer__content">
-                <h3 class="section__subtitle">
-                    Project <span>11</span>
-                </h3>
-                <h2 class="section__title">Form Validation using JavaScript & jQuery</h2>
-                <p class="developer__description">
-                    I created a dynamic <strong>form validation system</strong> using <strong>vanilla
-                        JavaScript</strong> and
-                    <strong>jQuery</strong>. The form ensures that users input valid data before submission, enhancing
-                    user experience and minimizing errors.
-                </p>
-
-                <ul class="developer__list">
-                    <li>✅ Real-time input validation for name, email, password, etc.</li>
-                    <li>⚠️ Error messages displayed for invalid inputs</li>
-                    <li>🔁 Prevents form submission on validation failure</li>
-                    <li>💡 Clean and responsive form UI</li>
-                    <li>📜 Regular expressions for validating formats</li>
-                    <li>🔄 jQuery animations for smooth feedback</li>
-                </ul>
-
-                <p class="developer__description">
-                    This project helped me strengthen my understanding of <strong>form handling</strong>,
-                    <strong>event listeners</strong>, <strong>regex patterns</strong>, and <strong>jQuery DOM
-                        manipulation</strong>.
-                </p>
-            </div>
-
-            <!-- Right Side: Image -->
-            <div class="developer__image">
-                <img src="./assets/img/Screenshot 2024-06-01 200215.png" alt="Form Validation Preview" />
-            </div>
+      <!-- Project 11 -->
+      <div class="project">
+        <img src="./assets/img/Screenshot 2024-06-01 200215.png" alt="Form Validation" class="project__image" />
+        <div class="project__info">
+          <h3>Form Validation</h3>
+          <p>JS & jQuery validation with error feedback and animations.</p>
+          <div class="project__links">
+            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
+            <a href="#" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a> -->
+          </div>
         </div>
-
-
-
-
-
+      </div>
 
     </section>
+  </main>
 
+  <footer class="footer container">
+    <h2>Jishnu M</h2>
+    <p>BCA Graduate | MERN Stack Developer</p>
+    <div class="footer__social">
+      <a href="https://www.facebook.com/JISHNUM77701/" target="_blank"><i class="ri-facebook-circle-fill"></i></a>
+      <a href="https://www.instagram.com/j_i_s_h_n_u__m/" target="_blank"><i class="ri-instagram-line"></i></a>
+      <a href="https://x.com/bigilbro123" target="_blank"><i class="ri-twitter-fill"></i></a>
+      <a href="https://github.com/jishnuMgit" target="_blank"><i class="ri-github-fill"></i></a>
+    </div>
+    <small>&copy; 2025 Jishnu M. All Rights Reserved</small>
+  </footer>
 
-    <footer class="footer">
-        <div class="footer__container container grid">
-            <h1 class="footer__title">
-                Jishnu <span>M</span>
-            </h1>
-            <h2 class="footer__education">
-                Bachelor of Computer Applications(BCA)<br>
-                Mern Stack developer
-            </h2>
-            <div class="footer__social">
-                <a href="https://www.facebook.com/JISHNUM77701/" target="_blank" class="footer__social-link">
-                    <i class="ri-facebook-circle-fill"></i>
-                </a>
-                <a href="https://www.instagram.com/j_i_s_h_n_u__m/" target="_blank" class="footer__social-link">
-                    <i class="ri-instagram-line"></i>
-                </a>
-                <a href="https://x.com/bigilbro123" target="_blank" class="footer__social-link">
-                    <i class="ri-twitter-fill"></i>
-                </a>
-            </div>
-            <span class="footer__copy">
-                &#169; copyright jishnu M. All rights reserved
-            </span>
-        </div>
-    </footer>
-    <a href="" id="scroll-up" class="scroll-up">
-        <i class="ri-arrow-up-line"></i>
-    </a>
-
-
-
-    <script src="assets/js/main.js"></script>
-
+  <script src="assets/js/main.js"></script>
 </body>
-
 </html>
