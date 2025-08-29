@@ -1,431 +1,941 @@
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="assets/css/styles.css">
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jishnu M — MERN Developer</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-</head>
+<style>
+/* Base */
+.header {
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  position: sticky;
+  top: 0;
+ 
+  z-index: 1000;
+}
+.nav.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+}
+.nav__list {
+  display: flex;
+  gap: 1rem;
+}
+.nav__link {
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav__toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 150px;
+}
 
-<body>
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav__logo">
-                JISHNU <span>M</span>
-            </a>
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="#home" class="nav__link">HOME</a>
-                    </li>
+/* Mobile */
+@media (max-width: 768px) {
+  .nav__toggle {
+    display: block;
+    cursor: pointer;
+  }
+  .nav__list {
+    position: fixed;
+    top: 10px;
+ 
 
-                    <li class="nav__item">
-                        <a href="#about" class="nav__link">About</a>
-                    </li>
+    display: flex;
+    justify-content: center;
+    justify-items: center;
 
-                    <li class="nav__item">
-                        <a href="#service" class="nav__link">Service</a>
-                    </li>
+    
+    left: -100%;
+    height: 300px;
+    width: 220px;
+    flex-direction: column;
+    background: rgb(55, 54, 54); /* translucent layer */
+  
+  border: 1px solid rgba(255, 255, 255, 0.3); /* glass edge highlight */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  
+    border-radius: 30px;
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    transition: left 0.3s ease-in-out;
+  }
+  .nav__list.active {
+    left: 0;
+  }
+  .nav__actions {
+    display: none; /* keep header clean on mobile */
+  }
+  .nav__link{
+margin-left: 50px;
+  }
+}
+</style>
+    <style>
+      /* =====================
+         THEME & TOKENS
+      ======================*/
+      :root{
+        --bg:#0b0d10; --bg-soft:#0f1217; --surface:#121722; --surface-2:#151b2a; --text:#e7ecf3; --muted:#9aaac3;
+        --primary:#7c5cff; --primary-600:#6a48ff; --accent:#22d3ee; --border:#24314a; --ring:rgba(124,92,255,.35);
+        --radius:16px; --shadow:0 10px 25px rgba(0,0,0,.35); --shadow-soft:0 8px 16px rgba(0,0,0,.25);
+        --container:1100px; --gap:18px;
+      }
+      [data-theme="light"]{
+        --bg:#f6f8fc; --bg-soft:#ffffff; --surface:#ffffff; --surface-2:#f4f6ff; --text:#0e1320; --muted:#475569;
+        --primary:#6d28d9; --primary-600:#5b21b6; --accent:#0ea5e9; --border:#e6e8ef; --ring:rgba(109,40,217,.25);
+        --shadow:0 10px 25px rgba(0,0,0,.08); --shadow-soft:0 8px 16px rgba(0,0,0,.06);
+      }
 
-                    <li class="nav__item">
-                        <a href="#projects" class="nav__link">Projects</a>
-                    </li>
+      /* =====================
+         BASE
+      ======================*/
+      *,*::before,*::after{box-sizing:border-box}
+      html,body{height:100%}
+      body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;line-height:1.6;color:var(--text);background:
+        radial-gradient(1100px 600px at 70% -10%, rgba(124,92,255,.12), transparent 55%),
+        radial-gradient(900px 500px at -10% 10%, rgba(34,211,238,.10), transparent 55%),
+        var(--bg)}
+      img{max-width:100%;display:block;height:auto}
+      a{color:inherit;text-decoration:none}
+      .container{width:min(100%,var(--container));margin-inline:auto;padding-inline:20px}
+      .section{padding:64px 0}
+      .title{font-size:clamp(1.25rem,2.3vw,1.75rem);margin:0 0 10px}
+      .subtitle{color:var(--muted);margin:0 0 18px}
+      .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:color-mix(in oklab, var(--bg-soft) 75%, transparent);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:.9rem}
+      .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg-soft);color:var(--text);font-weight:600}
+      .btn i{font-size:1.1rem}
+      .btn:hover{border-color:color-mix(in oklab, var(--border) 55%, var(--primary));box-shadow:0 0 0 6px var(--ring)}
+      .btn--primary{background:linear-gradient(135deg,var(--primary),var(--accent));border-color:transparent}
 
-                    <li class="nav__item">
-                        <a href="#contact" class="nav__link">contact</a>
-                    </li>
-                    <!-- <li>
-                        <a href="" style="background-color: blue; color: white; border-radius: 10px; padding: 10px;">BLUE</a>
-                    </li> -->
+      /* =====================
+         HEADER / NAV
+      ======================*/
+      .header{position:sticky;top:0;z-index:50;background:color-mix(in oklab, var(--bg-soft) 75%, transparent);backdrop-filter:saturate(1.1) blur(10px);border-bottom:1px solid var(--border)}
+      .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+      .nav__logo{font-weight:800;letter-spacing:.4px}
+      .nav__logo span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+      .nav__list{display:flex;gap:14px;list-style:none;margin:0;padding:0}
+      .nav__link{padding:8px 10px;border-radius:10px;color:var(--muted)}
+      .nav__link:hover{color:var(--text);background:color-mix(in oklab, var(--border) 40%, transparent)}
+      .nav__actions{display:flex;align-items:center;gap:10px}
+      .icon-btn{width:40px;height:40px;border:1px solid var(--border);border-radius:12px;background:var(--bg-soft);display:inline-flex;align-items:center;justify-content:center}
+      .icon-btn:hover{border-color:color-mix(in oklab, var(--border) 55%, var(--primary));box-shadow:0 0 0 6px var(--ring)}
 
+      /* =====================
+         HERO
+      ======================*/
+      .hero{padding:60px 0 10px}
+      .hero__grid{display:grid;gap:22px;align-items:center}
+      .hero__title{font-size:clamp(1.6rem,3.2vw,2.4rem);margin:8px 0}
+      .hero__desc{color:var(--muted);max-width:65ch}
+      .hero__image{justify-self:center}
+      .blob{aspect-ratio:1/1;width:min(320px,85%);background:conic-gradient(from 0deg,var(--surface),var(--surface-2));border-radius:38% 62% 55% 45%/60% 40% 60% 40%;box-shadow:var(--shadow-soft);border:1px solid var(--border);overflow:hidden}
+.blob img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or cover for tighter fill */
+  margin-top: 15px; /* reduced top margin so it sits bigger */
+  transform: scale(1.1); /* make it 10% bigger */
+}
+      @media (min-width: 900px){.hero__grid{grid-template-columns:1.1fr .9fr}}
 
-                    <div class="nav__close" id="nav-close">
-                        <i class="ri-close-large-line"></i>
-                    </div>
-            </div>
-            <div class="nav__toggle" id="nav-toggle">
-                <i class="ri-menu-line"></i>
-            </div>
-        </nav>
-    </header>
-    <main class="main">
-        <section class="home section" id="home">
-            <div class="home__container container grid">
-                <div class="home__content">
-                    <div class="home__data">
-                        <h3 class="home__subtitle">
-                            Hello, <span>I'm</span></h3>
-                        <h1 class="home__title">Jishnu M</h1>
-                        <h3 class="home__education">Mern Stack Developer</h3>
-                        I specialize in building dynamic and scalable web applications using the MERN stack, which
-                        includes MongoDB, Express.js, React, and Node.js. My expertise in JavaScript ties all these
-                        technologies together to deliver complete full-stack solutions. I learned MERN stack development
-                        from Zoople Technologies and successfully completed a 4-month internship at Rootments, where I
-                        gained hands-on experience in real-world projects.
-                        <p class="home__description">
+      /* =====================
+         ABOUT
+      ======================*/
+      .about{display:grid;gap:18px}
+      @media (min-width: 900px){.about{grid-template-columns:1fr 1fr}}
+      .about__card{border:1px solid var(--border);background:linear-gradient(180deg, color-mix(in oklab, var(--surface) 92%, transparent), color-mix(in oklab, var(--surface-2) 92%, transparent));border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft)}
 
-                        </p>
-                        <a href="#contact" class="button">Let's Talk</a>
-                        <a class="button" style="cursor: pointer;" href="assets/files/CV.pdf"
-                            download="jishnuM(MERN).pdf">
-                            <button style="background-color: transparent; cursor: pointer;color: white; ">Get My
-                                CV</button>
-                        </a>
+      /* =====================
+         SKILLS
+      ======================*/
+      .skills{display:grid;gap:18px}
+      .skills__wrap{display:grid;gap:12px}
+      @media (min-width: 760px){.skills__wrap{grid-template-columns:1fr 1fr}}
+      .chip{font-size:.85rem;border:1px solid var(--border);padding:6px 10px;border-radius:999px;color:var(--muted);background:color-mix(in oklab, var(--bg-soft) 80%, transparent)}
+      .chipset{display:flex;flex-wrap:wrap;gap:8px}
 
+      /* =====================
+         SERVICES
+      ======================*/
+      .grid{display:grid;gap:var(--gap)}
+      .services{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+      .card{border:1px solid var(--border);background:linear-gradient(180deg, color-mix(in oklab, var(--surface) 92%, transparent), color-mix(in oklab, var(--surface-2) 92%, transparent));border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft);transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+      .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:color-mix(in oklab, var(--border) 60%, var(--primary))}
+      .card .ri{font-size:1.6rem;color:var(--accent)}
 
-                    </div>
-                    <div class="home__social">
-                        <a href="https://github.com/jishnuMgit" target="_blank" class="home__social-linK">
-                            <i class="ri-github-fill"></i>
-                        </a>
-                        <a href="https://www.instagram.com/j_i_s_h_n_u__m/" target="_blank" class="home__social-linK">
-                            <i class="ri-instagram-line"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/jishnu-m-11760b2b0/" target="_blank"
-                            class="home__social-linK">
-                            <i class="ri-linkedin-fill"></i>
+      /* =====================
+         PROJECTS
+      ======================*/
+      .projects-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+      .project{display:grid;grid-template-rows:170px auto}
+      .project__media{position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--border);background:#0f131a}
+      .project__media img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform .35s ease}
+      .project:hover .project__media img{transform:scale(1.06)}
+      .project__body{padding:12px}
+      .project__title{margin:0 0 6px}
+      .project__desc{color:var(--muted);margin:0}
 
-                        </a>
-                    </div>
-                </div>
-                <div class="home__image">
-                    <svg class="home__blob" viewBox="0 0 550 591" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="maskBlob" mask-type="alpha">
-                            <path d="M263 47.1782C270.426 42.891 279.574 42.891 287 47.1782L501.157 
-                           170.822C508.583 175.109 513.157 183.032 513.157 191.606V438.894C513.157 
-                           447.468 508.583 455.391 501.157 459.678L287 583.322C279.574 587.609 270.426 
-                           587.609 263 583.322L48.843 459.678C41.4174 455.391 36.843 447.468 36.843 
-                           438.894V191.606C36.843 183.032 41.4174 175.109 48.843 170.822L263 47.1782Z" />
-                        </mask>
-                        <g mask="url(#maskBlob)">
-                            <path d="M263 47.1782C270.426 42.891 279.574 42.891 287 47.1782L501.157 
-                           170.822C508.583 175.109 513.157 183.032 513.157 191.606V438.894C513.157 
-                           447.468 508.583 455.391 501.157 459.678L287 583.322C279.574 587.609 270.426 
-                           587.609 263 583.322L48.843 459.678C41.4174 455.391 36.843 447.468 36.843 
-                           438.894V191.606C36.843 183.032 41.4174 175.109 48.843 170.822L263 47.1782Z" />
+      /* =====================
+         CONTACT
+      ======================*/
+      .contact__grid{display:grid;gap:18px}
+      @media (min-width: 860px){.contact__grid{grid-template-columns:1.1fr .9fr}}
+      .form{display:grid;gap:12px}
+      .form__row{display:grid;gap:12px}
+      @media (min-width: 600px){.form__row{grid-template-columns:1fr 1fr}}
+      .input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg-soft);color:var(--text)}
+      .input:focus{outline:none;box-shadow:0 0 0 6px var(--ring);border-color:color-mix(in oklab, var(--border) 55%, var(--primary))}
+      textarea.input{min-height:140px;resize:vertical}
 
-                            <rect x="37" width="476" height="630" fill="url(#pattern0)" />
-                        </g>
+      /* =====================
+         FOOTER
+      ======================*/
+      .footer{border-top:1px solid var(--border);background:color-mix(in oklab, var(--bg-soft) 75%, transparent);padding:34px 0 56px}
+      .footer__top{display:grid;gap:10px}
+      .social{width:42px;height:42px;border:1px solid var(--border);border-radius:12px;background:var(--bg-soft);display:inline-flex;align-items:center;justify-content:center}
+      .social:hover{border-color:color-mix(in oklab, var(--border) 55%, var(--primary));box-shadow:0 0 0 6px var(--ring)}
+      .copy{color:var(--muted)}
 
-                        <rect x="37" width="476" height="300" fill="url(#pattern1)" />
+      /* Scroll Up */
+      .scroll-up{position:fixed;right:16px;bottom:18px;width:44px;height:44px;border-radius:12px;background:var(--primary);display:grid;place-items:center;color:#fff;opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease}
+      .scroll-up.show{opacity:1;pointer-events:auto;transform:translateY(-4px)}
+    </style>
+  </head>
 
-                        <defs>
-                            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                <use href="#imageBlob" transform="matrix(0.00143057 0 0 0.00108108 0.0404062 0)" />
-                            </pattern>
+  <body>
+    <!-- HEADER -->
+   <header class="header" id="header">
+  <nav class="nav container" aria-label="Primary">
+    <a href="#home" class="nav__logo">JISHNU <span>M</span></a>
 
-                            <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                <use href="#imageBlob" transform="matrix(0.00143057 0 0 0.00226984 0.0404062 0)" />
-                            </pattern>
+    <!-- Mobile menu button -->
+    <button class="nav__toggle" id="nav-toggle" aria-label="Open menu">
+      <i class="ri-menu-line"></i>
+    </button>
 
-                            <!-- Insert your profile (recommended size: 640 x 940) -->
-                            <image class="home__img" id="imageBlob" width="640" height="925"
-                                href="assets/img/file (1).png" />
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-        </section>
-        <section class="about section" id="about">
-            <div class="about__container container grid">
-                <div class="about__data">
-                    <div>
-                        <h3 class="section__subtitle">
-                            MY <span>Intro</span>
-                        </h3>
-                        <h2 class="section__title">
-                            About Me
-                        </h2>
-                        <p class="about__description">
-                            As a MERN stack developer, I create dynamic web applications using MongoDB, Express.js,
-                            React.js, and Node.js. I handle both front-end and back-end development, ensuring seamless
-                            user
-                            experiences and robust server-side functionality. My skills in JavaScript and modern web
-                            technologies help me deliver scalable, high-performance applications.
-                        </p>
-                    </div>
-                    <a href="#contact" class="button">Contact Me</a>
+    <!-- Nav list -->
+    <ul class="nav__list" id="nav-list" role="menubar">
+      <li role="none"><a role="menuitem" href="#home" class="nav__link">Home</a></li>
+      <li role="none"><a role="menuitem" href="#about" class="nav__link">About</a></li>
+      <li role="none"><a role="menuitem" href="#skills" class="nav__link">Skills</a></li>
+      <li role="none"><a role="menuitem" href="#services" class="nav__link">Services</a></li>
+      <li role="none"><a role="menuitem" href="#projects" class="nav__link">Projects</a></li>
+      <li role="none"><a role="menuitem" href="#contact" class="nav__link">Contact</a></li>
+    </ul>
 
-                    <!-- Education Section -->
+    <div class="nav__actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+        <i id="theme-icon" class="ri-sun-line"></i>
+      </button>
+      <a class="btn btn--primary" href="assets/files/CV.pdf" download="JishnuM-MERN.pdf">
+        <i class="ri-download-2-line"></i> CV
+      </a>
+    </div>
+  </nav>
+</header>
 
-                </div>
-
-                <div class="about__image">
-                    <svg class="about__blob" viewBox="0 0 550 592" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="maskBorder" mask-type="alpha">
-                            <path d="M263 48.1782C270.426 43.891 279.574 43.891 287 48.1782L501.157 
-               171.822C508.583 176.109 513.157 184.032 513.157 192.606V439.894C513.157 
-               448.468 508.583 456.391 501.157 460.678L287 584.322C279.574 588.609 
-               270.426 588.609 263 584.322L48.843 460.678C41.4174 456.391 36.843 448.468 36.843 
-               439.894V192.606C36.843 184.032 41.4174 176.109 48.843 171.822L263 48.1782Z" fill="black" />
-                        </mask>
-                        <g mask="url(#maskBorder)">
-                            <rect x="37" width="476" height="630" fill="url(#pattern2)" />
-
-                            <path d="M285 51.6423L499.157 175.286C505.345 178.859 509.157 185.461 509.157 
-               192.606V439.894C509.157 447.039 505.345 453.641 499.157 457.214L285 
-               580.858C278.812 584.43 271.188 584.43 265 580.858L50.843 457.214C44.655 453.641 
-               40.843 447.039 40.843 439.894V192.606C40.843 185.461 44.655 178.859 50.843 
-               175.286L265 51.6423C271.188 48.0697 278.812 48.0696 285 51.6423Z" stroke="black" stroke-width="10" />
-                        </g>
-
-                        <rect x="37" width="476" height="300" fill="url(#pattern3)" />
-
-                        <defs>
-                            <pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                <use href="#imageBorder" transform="matrix(0.00143057 0 0 0.00108108 0.0404062 0)" />
-                            </pattern>
-
-                            <pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                <use href="#imageBorder" transform="matrix(0.00143057 0 0 0.00226984 0.0404062 0)" />
-                            </pattern>
-
-                            <!-- Insert your profile (recommended size: 640 x 940) -->
-                            <image class="about__image" id="imageBorder" width="640" height="940"
-                                href="assets/img/file (1).png" />
-                        </defs>
-                    </svg>
-
-                </div>
-            </div>
-
-        </section>
-        <section class="skills section">
-            <div class="skills__container container grid">
-                <div class="skill__data">
-                    <h3 class="section__subtitle">
-                        Favorite <span>Skills</span>
-                    </h3>
-                    <h2 class="scetion__title">
-                        My Skills
-                    </h2>
-                    <p class="skills__description">
-                        I am a dedicated MERN stack developer trained at Zoople Technologies, with hands-on experience
-                        from a 4-month internship at Rootments.
-                    </p>
-                    <a href="#projects" class="button">See Projects</a>
-                </div>
-                <div>
-
-
-                    <div class="skills__content">
-
-                        <ol class="skills__group">
-                            <li class="skills__item">HTML&CSS</li>
-                            <li class="skills__item">Bootstarp</li>
-                            <li class="skills__item">tailwind</li>
-                            <li class="skills__item" id="skill__last">React</li>
-                            <li class="skills__item" id="skill__last">Node.js</li>
-                        </ol>
-
-                        <ol class="skills__group" start="6">
-                            <li class="skills__item">Express.js</li>
-                            <li class="skills__item">Redux.js</li>
-                            <li class="skills__item">MongoDB</li>
-                            <li class="skills__item">Git & GitHub</li>
-                            <li class="skills__item">ReactNative </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <section class="service section" id="service">
-            <h3 class="section__subtitle">
-                My <span>Service</span>
-            </h3>
-            <h2 class="section__title">
-                What I do
-            </h2>
-            <div class="service__container container grid">
-                <article class="services__card">
-                    <i class="ri-layout-3-line service__icon"></i>
-                    <h2 class="service__title">
-                        Web Developer
-                    </h2>
-                    <p class="service__description">
-                        Development of custom web page.
-                        Using current technologies and
-                        libraries of the labor field
-                    </p>
-                </article>
-
-                <article class="services__card">
-                    <i class="ri-pantone-line service__icon"></i>
-                    <h2 class="service__title">
-                        Technologies
-                    </h2>
-                    <p class="service__description">
-                        MongoDB, Express.js, React, and Node.js.
-                        And new developing technologies
-                    </p>
-                </article>
-
-                <article class="services__card">
-                    <i class="ri-pen-nib-fill service__icon"></i>
-                    <h2 class="service__title">
-                        My Role
-                    </h2>
-                    <p class="service__description">
-                        I build full-stack applications on client request, utilizing the MERN stack for dynamic and
-                        responsive web solutions. My services include feature development, custom functionality, and
-                        scalable backend integration
-                    </p>
-                </article>
-
-
-                <article class="services__card">
-                    <i class="ri-team-fill service__icon"></i>
-                    <h2 class="service__title">
-                        Team Work
-                    </h2>
-                    <p class="service__description">
-                        I am a dedicated and hardworking individual who takes pride in delivering high-quality results.
-                        I thrive in collaborative environments and am always eager to learn and grow both personally and
-                        professionally. </p>
-                </article>
-            </div>
-        </section>
-        <section class="projects section" id="projects">
-            <h3 class="section__subtitle">MY <span style="color:  hsl(var(--hue), 100%, 40%);">WORK'S</span></h3>
-            <h2 class="section__subtitle">
-                Recent Projects
-            </h2>
-            <div class="projects__container container grid">
-                <article class="projects__card">
-                    <img src="assets/img/Screenshot 2024-05-20 145352.png.png" alt="project name" class="projects__img">
-                    <!-- <div class="projectd__modal">
-                        <span class="project__subtitle">
-                            web
-                        </span>
-                        <h2 class="projects__title">Modern website</h2>
-                        <a href="https://bigilbro123.github.io/Netflixs/" target="_blank" class="projects__button">View
-                            Demo
-                            <i class="ri-external-link-line"></i>
-                        </a>
-                    </div> -->
-                </article>
-
-
-                <article class="projects__card">
-                    <img src="assets/img/pj2.png" alt="project name" class="projects__img">
-                    <!-- <div class="projectd__modal">
-                        <span class="project__subtitle">
-                            web
-                        </span>
-                        <h2 class="projects__title">Modern website</h2>
-                        <a href="https://mern-ecommerce-1-mzqt.onrender.com/" target="_blank"
-                            class="projects__button">View Demo
-                            <i class="ri-external-link-line"></i>
-                        </a>
-                    </div> -->
-                </article>
-
-
-                <article class="projects__card">
-                    <img src="assets/img/pj3.png" alt="project name" class="projects__img">
-                    <!-- <div class="projectd__modal">
-                        <span class="project__subtitle">
-                            web
-                        </span>
-                        <h2 class="projects__title">Modern website</h2>
-                        <a href="https://github.com/bigilbro123/NEXT_JS__TODO" target="_blank"
-                            class="projects__button">View Demo
-                            <i class="ri-external-link-line"></i>
-                        </a>
-                    </div> -->
-                </article>
-
-
-                <article class="projects__card">
-                    <img src="assets/img/pj1.png" alt="project name" class="projects__img">
-                    <!-- <div class="projectd__modal">
-                        <span class="project__subtitle">
-                            web
-                        </span>
-                        <h2 class="projects__title">Modern website</h2>
-                        <a href="https://twitter-front.onrender.com/" target="_blank" class="projects__button">View Demo
-                            <i class="ri-external-link-line"></i>
-                        </a>
-                    </div> -->
-                </article>
-
-
-            </div>
-            <div class="Divprojectbutton">
-
-                <a href="/Project.html"> <button class="projectbutton">View all Project</button>
-                </a>
-            </div>
-        </section>
-        <section class="contact section" id="contact">
-            <h3 class="section__subtitle" id="contact">
-                Get In <span>Touch</span>
-            </h3>
-            <h2 class="section__title">
-                Contact Me
-            </h2>
-            <div class="contact__cantainer container grid">
-                <form action="" class="contact__form" id="contact-form">
-                    <div class="contact_group">
-                        <input type="text" name="user_name" required placeholder="Enter your name"
-                            class="contact__input">
-                        <input type="email" name="user_email" required placeholder="Enter your Email"
-                            class="contact__input">
-
-                    </div>
-                    <textarea name="user__project" id="user_project" required placeholder="Enter your message"
-                        class="contact__input"></textarea>
-                    <p class="cantact__message" id="contact-message">
-
-                    </p>
-                    <button type="submit" class="button contact__button">Send Message</button>
-                </form>
-            </div>
-        </section>
-
-
-    </main>
-    <footer class="footer">
-        <div class="footer__container container grid">
-            <h1 class="footer__title">
-                Jishnu <span>M</span>
-            </h1>
-            <h2 class="footer__education">
-                Bachelor of Computer Applications(BCA)<br>
-                Mern Stack developer
-            </h2>
-            <div class="footer__social">
-                <a href="https://www.facebook.com/JISHNUM77701/" target="_blank" class="footer__social-link">
-                    <i class="ri-facebook-circle-fill"></i>
-                </a>
-                <a href="https://www.instagram.com/j_i_s_h_n_u__m/" target="_blank" class="footer__social-link">
-                    <i class="ri-instagram-line"></i>
-                </a>
-                <a href="https://x.com/bigilbro123" target="_blank" class="footer__social-link">
-                    <i class="ri-twitter-fill"></i>
-                </a>
-            </div>
-            <span class="footer__copy">
-                &#169; copyright jishnu M. All rights reserved
-            </span>
+    <!-- HERO -->
+    <section id="home" class="section hero">
+      <div class="container hero__grid">
+        <div>
+          <span class="pill"><i class="ri-terminal-box-line"></i> MERN Stack Developer</span>
+          <h1 class="hero__title">Hi, I'm <span style="background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">Jishnu M</span></h1>
+          <p class="hero__desc">I build dynamic, scalable web applications using MongoDB, Express, React, and Node. With over 8 months of hands-on experience, I specialize in delivering efficient, user-focused solutions across both frontend and backend.</p>
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <a href="#projects" class="btn btn--primary"><i class="ri-rocket-line"></i> View Projects</a>
+            <a href="#contact" class="btn"><i class="ri-mail-line"></i> Let's Talk</a>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:14px">
+            <a href="https://github.com/jishnuMgit" class="social" target="_blank" aria-label="GitHub"><i class="ri-github-fill"></i></a>
+            <a href="https://www.linkedin.com/in/jishnu-m-11760b2b0/" class="social" target="_blank" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+            <a href="https://www.instagram.com/j_i_s_h_n_u__m/" class="social" target="_blank" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+          </div>
         </div>
-    </footer>
-    <a href="" id="scroll-up" class="scroll-up">
-        <i class="ri-arrow-up-line"></i>
-    </a>
 
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function () {
-            emailjs.init("your_user_id"); // Replace with your actual user ID from EmailJS
-        })();
-    </script>
-    <script src="assets/js/main.js"></script>
-</body>
+        <div class="hero__image">
+          <div class="blob">
+            <img src="assets/img/file (1).png" alt="Portrait of Jishnu M"/>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container about">
+        <div class="about__card">
+          <h2 class="title">About Me</h2>
+          <p class="subtitle">I create end‑to‑end products: clean UI, solid APIs, optimized databases.</p>
+          <p>As a MERN stack developer, I work across front‑end and back‑end to deliver reliable, performant applications. I focus on developer ergonomics, component reusability, and production‑grade patterns like authentication, state management and CI/CD basics.</p>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <a class="btn" href="#projects"><i class="ri-eye-line"></i> See Work</a>
+            <a class="btn" href="mailto:jishnum77701@gmail.com"><i class="ri-mail-send-line"></i> Email</a>
+          </div>
+        </div>
+        <div class="about__card">
+          <h3 class="title">Highlights</h3>
+          <ul style="margin:0;padding-left:18px">
+         <li>LMS with training modules, progress tracking & escalations</li>
+<li>E-commerce app with auth, product catalog & cart/checkout</li>
+<li>Financial dashboard for expense tracking and reports</li>
+<li>Brand website: Suitor Guy</li>
+<li>Restaurant management system with customer module</li>
+<li>Sales management project for vendors</li>
+<li>Unicode generator for warehouse</li>
+
+
+
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="container skills">
+        <div>
+          <h2 class="title">My Skills</h2>
+          <p class="subtitle">Comfortable across the MERN stack and modern tooling.</p>
+        </div>
+        <div class="skills__wrap">
+          <div class="about__card">
+            <h3 class="title" style="font-size:1.05rem">Core</h3>
+            <div class="chipset">
+              <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+              <span class="chip">React</span><span class="chip">Redux</span><span class="chip">Node.js</span>
+              <span class="chip">Express</span><span class="chip">MongoDB</span><span class="chip">prisma</span>
+              <span class="chip">TypeScript</span><span class="chip">nestJS</span>
+            </div>
+          </div>
+          <div class="about__card">
+            <h3 class="title" style="font-size:1.05rem">Tools & Extras</h3>
+            <div class="chipset">
+              <span class="chip">Git & GitHub</span><span class="chip">Tailwind</span><span class="chip">Bootstrap</span>
+              <span class="chip">REST APIs</span><span class="chip">React Native (basic)</span>
+              <span class="chip">whatsapp integration</span>   <span class="chip">daisy ui</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="title">What I Do</h2>
+        <p class="subtitle">End‑to‑end development with a focus on UX and reliability.</p>
+        <div class="grid services">
+          <article class="card">
+            <i class="ri-layout-3-line"></i>
+            <h3 class="title" style="font-size:1.05rem">Web Development</h3>
+            <p>Custom web applications using modern stacks and best practices.</p>
+          </article>
+          <article class="card">
+            <i class="ri-pantone-line"></i>
+            <h3 class="title" style="font-size:1.05rem">Technologies</h3>
+            <p>MongoDB, Express, React, Node + popular UI libs and state tools.</p>
+          </article>
+          <article class="card">
+            <i class="ri-pen-nib-fill"></i>
+            <h3 class="title" style="font-size:1.05rem">Product Work</h3>
+            <p>Feature development, integrations, and scalable API/back‑end design.</p>
+          </article>
+          <article class="card">
+            <i class="ri-team-fill"></i>
+            <h3 class="title" style="font-size:1.05rem">Team</h3>
+            <p>Collaborative, feedback‑driven approach with clear communication.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="title">Recent Projects</h2>
+        <p class="subtitle">A few shipped builds and experiments.</p>
+        <div class="grid projects-grid">
+          <!-- Fix the .png.png path in your assets folder if needed -->
+          <article class="card project">
+            <div class="project__media"><img src="assets/img/Screenshot 2024-05-20 145352.png" alt="Nike landing page clone"/></div>
+            <div class="project__body">
+              <h3 class="project__title">Nike Website Clone</h3>
+              <p class="project__desc">Responsive landing page built with semantic HTML & CSS.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+                <a class="btn" href="https://github.com/jishnuMgit/nike" target="_blank"><i class="ri-github-fill"></i> Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__media"><img src="assets/img/pj2.png" alt="MERN e‑commerce"/></div>
+            <div class="project__body">
+              <h3 class="project__title">E‑Commerce App (MERN)</h3>
+              <p class="project__desc">Auth, products, cart, and basic checkout flows.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+                <a class="btn" href="https://github.com/jishnuMgit/mern-ecommerce" target="_blank"><i class="ri-github-fill"></i> Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__media"><img src="assets/img/pj3.png" alt="Advanced Todo app"/></div>
+            <div class="project__body">
+              <h3 class="project__title">Advanced To‑Do (React)</h3>
+              <p class="project__desc">Filters, local storage, and modular components.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+                <a class="btn" href="https://github.com/jishnuMgit/todo" target="_blank"><i class="ri-github-fill"></i> Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__media"><img src="assets/img/pj1.png" alt="Twitter clone"/></div>
+            <div class="project__body">
+              <h3 class="project__title">Twitter Clone (MERN)</h3>
+              <p class="project__desc">Tweets, comments, profiles and JWT auth.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+                <a class="btn btn--primary" href="https://twitter-front.onrender.com/" target="_blank"><i class="ri-global-line"></i> Live</a>
+                <a class="btn" href="https://github.com/jishnuMgit/twitter-clone" target="_blank"><i class="ri-github-fill"></i> Code</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div style="margin-top:16px;text-align:center">
+          <a href="/Project.html" class="btn"><i class="ri-folder-2-line"></i> View all Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <!-- <section id="contact" class="section">
+      <div class="container contact__grid">
+        <div>
+          <h2 class="title">Contact Me</h2>
+          <p class="subtitle">Have a project or a question? Let's build something great.</p>
+          <div style="display:flex;gap:10px">
+            <a class="btn" href="mailto:jishnum77701@gmail.com"><i class="ri-mail-send-line"></i> Email</a>
+            <a class="btn" href="https://github.com/jishnuMgit" target="_blank"><i class="ri-github-fill"></i> GitHub</a>
+          </div>
+        </div>
+        <form class="form" id="contact-form">
+          <div class="form__row">
+            <input class="input" type="text" name="user_name" placeholder="Your name" required />
+            <input class="input" type="email" name="user_email" placeholder="Email address" required />
+          </div>
+          <textarea class="input" name="user_message" placeholder="Your message" required></textarea>
+          <p id="contact-message" class="subtitle" style="min-height: 1.2em"></p>
+          <button type="submit" class="btn btn--primary"><i class="ri-send-plane-fill"></i> Send</button>
+        </form>
+      </div>
+    </section> -->
+
+   <section id="contact" class="section contact">
+  <div class="container contact__grid">
+    <div>
+      <!-- Subtitle from second version -->
+      <h3 class="section__subtitle">Get In <span>Touch</span></h3>
+      <!-- Title from first version -->
+      <h2 class="title">Contact Me</h2>
+      <p class="subtitle">Have a project or a question? Let's build something great.</p>
+      <div style="display:flex;gap:10px">
+        <a class="btn" href="mailto:jishnum77701@gmail.com"><i class="ri-mail-send-line"></i> Email</a>
+        <a class="btn" href="https://github.com/jishnuMgit" target="_blank"><i class="ri-github-fill"></i> GitHub</a>
+      </div>
+    </div>
+
+    <!-- Form: design from first, functionality from second -->
+    <form class="form" id="contact-form">
+      <div class="form__row">
+        <input class="input" type="text" name="user_name" placeholder="Enter your name" required />
+        <input class="input" type="email" name="user_email" placeholder="Enter your Email" required />
+      </div>
+      <textarea class="input" name="user__project" id="user_project"  placeholder="Enter your message" required></textarea>
+      <p id="contact-message" class="subtitle" style="min-height: 1.2em"></p>
+      <button type="submit" class="btn btn--primary"><i class="ri-send-plane-fill"></i> Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER (first design kept) -->
+<footer class="footer">
+  <div class="container footer__top">
+    <h3 class="title" style="margin:0">Jishnu 
+      <span style="background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">M</span>
+    </h3>
+    <p class="subtitle">BCA • MERN Stack Developer</p>
+    <div style="display:flex;gap:10px;margin:8px 0 0">
+      <a href="https://www.facebook.com/JISHNUM77701/" target="_blank" class="social" aria-label="Facebook"><i class="ri-facebook-circle-fill"></i></a>
+      <a href="https://www.instagram.com/j_i_s_h_n_u__m/" target="_blank" class="social" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+      <a href="https://x.com/bigilbro123" target="_blank" class="social" aria-label="X"><i class="ri-twitter-fill"></i></a>
+    </div>
+    <small class="copy">© 2025 Jishnu M. All rights reserved</small>
+  </div>
+</footer>
+
+<!-- Scroll Up -->
+<a href="#home" id="scroll-up" class="scroll-up" aria-label="Scroll to top"><i class="ri-arrow-up-line"></i></a>
+
+<!-- EmailJS -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function () {
+    emailjs.init("your_user_id"); // Replace with your actual user ID
+  })();
+
+  const form = document.getElementById("contact-form");
+  const msg = document.getElementById("contact-message");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.textContent = "Sending…";
+
+    try {
+      await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        user_name: form.user_name.value,
+        user_email: form.user_email.value,
+        user_message: form.user_message.value,
+      });
+      msg.textContent = "Message sent! I will reply soon.";
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      msg.textContent = "Try to send message";
+    }
+  });
+</script>
+<script>
+const toggle = document.getElementById("nav-toggle");
+const navList = document.getElementById("nav-list");
+
+toggle.addEventListener("click", () => {
+  navList.classList.toggle("active");
+  toggle.innerHTML = navList.classList.contains("active")
+    ? '<i class="ri-close-line"></i>'
+    : '<i class="ri-menu-line"></i>';
+});
+</script>
+<script src="assets/js/main.js"></script>
+
+  </body>
 </html>
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jishnu M — MERN Developer</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <style>
+      /* =====================
+         THEME & TOKENS
+      ======================*/
+      :root{
+        --bg:#0b0d10; --bg-soft:#0f1217; --surface:#121722; --surface-2:#151b2a; --text:#e7ecf3; --muted:#9aaac3;
+        --primary:#7c5cff; --primary-600:#6a48ff; --accent:#22d3ee; --border:#24314a; --ring:rgba(124,92,255,.35);
+        --radius:16px; --shadow:0 10px 25px rgba(0,0,0,.35); --shadow-soft:0 8px 16px rgba(0,0,0,.25);
+        --container:1100px; --gap:18px;
+      }
+      [data-theme="light"]{
+        --bg:#f6f8fc; --bg-soft:#ffffff; --surface:#ffffff; --surface-2:#f4f6ff; --text:#0e1320; --muted:#475569;
+        --primary:#6d28d9; --primary-600:#5b21b6; --accent:#0ea5e9; --border:#e6e8ef; --ring:rgba(109,40,217,.25);
+        --shadow:0 10px 25px rgba(0,0,0,.08); --shadow-soft:0 8px 16px rgba(0,0,0,.06);
+      }
+
+      /* =====================
+         BASE
+      ======================*/
+      *,*::before,*::after{box-sizing:border-box}
+      html,body{height:100%}
+      body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;line-height:1.6;color:var(--text);background:
+        radial-gradient(1100px 600px at 70% -10%, rgba(124,92,255,.12), transparent 55%),
+        radial-gradient(900px 500px at -10% 10%, rgba(34,211,238,.10), transparent 55%),
+        var(--bg)}
+      img{max-width:100%;display:block;height:auto}
+      a{color:inherit;text-decoration:none}
+      .container{width:min(100%,var(--container));margin-inline:auto;padding-inline:20px}
+      .section{padding:64px 0}
+      .title{font-size:clamp(1.25rem,2.3vw,1.75rem);margin:0 0 10px}
+      .subtitle{color:var(--muted);margin:0 0 18px}
+      .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:color-mix(in oklab, var(--bg-soft) 75%, transparent);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:.9rem}
+      .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg-soft);color:var(--text);font-weight:600}
+      .btn i{font-size:1.1rem}
+      .btn:hover{border-color:color-mix(in oklab, var(--border) 55%, var(--primary));box-shadow:0 0 0 6px var(--ring)}
+      .btn--primary{background:linear-gradient(135deg,var(--primary),var(--accent));border-color:transparent}
+
+      /* =====================
+         HEADER / NAV
+      ======================*/
+      .header{position:sticky;top:0;z-index:50;background:color-mix(in oklab, var(--bg-soft) 75%, transparent);backdrop-filter:saturate(1.1) blur(10px);border-bottom:1px solid var(--border)}
+      .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+      .nav__logo{font-weight:800;letter-spacing:.4px}
+      .nav__logo span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+      .nav__list{display:flex;gap:14px;list-style:none;margin:0;padding:0}
+      .nav__link{padding:8px 10px;border-radius:10px;color:var(--muted)}
+      .nav__link:hover{color:var(--text);background:color-mix(in oklab, var(--border) 40%, transparent)}
+      .nav__actions{display:flex;align-items:center;gap:10px}
+      .icon-btn{width:40px;height:40px;border:1px solid var(--border);border-radius:12px;background:var(--bg-soft);display:inline-flex;align-items:center;justify-content:center}
+      .icon-btn:hover{border-color:color-mix(in oklab, var(--border) 55%, var(--primary));box-shadow:0 0 0 6px var(--ring)}
+
+      /* =====================
+         HERO
+      ======================*/
+      .hero{padding:60px 0 10px}
+      .hero__grid{display:grid;gap:22px;align-items:center}
+      .hero__title{font-size:clamp(1.6rem,3.2vw,2.4rem);margin:8px 0}
+      .hero__desc{color:var(--muted);max-width:65ch}
+      .hero__image{justify-self:center}
+      .blob{aspect-ratio:1/1;width:min(320px,85%);background:conic-gradient(from 0deg,var(--surface),var(--surface-2));border-radius:38% 62% 55% 45%/60% 40% 60% 40%;box-shadow:var(--shadow-soft);border:1px solid var(--border);overflow:hidden}
+      .blob img{width:100%;height:100%;object-fit:cover;mix-blend:normal}
+      @media (min-width: 900px){.hero__grid{grid-template-columns:1.1fr .9fr}}
+
+      /* =====================
+         ABOUT
+      ======================*/
+      .about{display:grid;gap:18px}
+      @media (min-width: 900px){.about{grid-template-columns:1fr 1fr}}
+      .about__card{border:1px solid var(--border);background:linear-gradient(180deg, color-mix(in oklab, var(--surface) 92%, transparent), color-mix(in oklab, var(--surface-2) 92%, transparent));border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft)}
+
+      /* =====================
+         SKILLS
+      ======================*/
+      .skills{display:grid;gap:18px}
+      .skills__wrap{display:grid;gap:12px}
+      @media (min-width: 760px){.skills__wrap{grid-template-columns:1fr 1fr}}
+      .chip{font-size:.85rem;border:1px solid var(--border);padding:6px 10px;border-radius:999px;color:var(--muted);background:color-mix(in oklab, var(--bg-soft) 80%, transparent)}
+      .chipset{display:flex;flex-wrap:wrap;gap:8px}
+
+      /* =====================
+         SERVICES
+      ======================*/
+      .grid{display:grid;gap:var(--gap)}
+      .services{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+      .card{border:1px solid var(--border);background:linear-gradient(180deg, color-mix(in oklab, var(--surface) 92%, transparent), color-mix(in oklab, var(--surface-2) 92%, transparent));border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft);transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+      .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:color-mix(in oklab, var(--border) 60%, var(--primary))}
+      .card .ri{font-size:1.6rem;color:var(--accent)}
+
+      /* =====================
+         PROJECTS
+      ======================*/
+      .projects-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+      .project{display:grid;grid-template-rows:170px auto}
+      .project__media{position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--border);background:#0f131a}
+      .project__media img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform .35s ease}
+      .project:hover .project__media img{transform:scale(1.06)}
+      .project__body{padding:12px}
+      .project__title{margin:0 0 6px}
+      .project__desc{color:var(--muted);margin:0}
+
+      /* =====================
+         CONTACT
+      ======================*/
+      .contact__grid{display:grid;gap:18px}
+      @media (min-width: 860px){.contact__grid{grid-template-columns:1.1fr .9fr}}
+      .form{display:grid;gap:12px}
+      .form__row{display:grid;gap:12px}
+      @media (min-width: 600px){.form__row{grid-template-columns:1fr 1fr}}
+      .input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg-soft);color:var(--text)}
+      .input:focus{outline:none;box-shadow:0 0 0 6px var(--ring);border-color:color-mix(in oklab, var(--border) 55%, var(--primary))}
+      textarea.input{min-height:140px;resize:vertical}
+
+      /* =====================
+         FOOTER
+      ======================*/
+      .footer{border-top:1px solid var(--border);background:color-mix(in oklab, var(--bg-soft) 75%, transparent);padding:34px 0 56px}
+      .footer__top{display:grid;gap:10px}
+      .social{width:42px;height:42px;border:1px solid var(--border);border-radius:12px;background:var(--bg-soft);display:inline-flex;align-items:center;justify-content:center}
+      .social:hover{border-color:color-mix(in oklab, var(--border) 55%, var(--primary));box-shadow:0 0 0 6px var(--ring)}
+      .copy{color:var(--muted)}
+
+      /* Scroll Up */
+      .scroll-up{position:fixed;right:16px;bottom:18px;width:44px;height:44px;border-radius:12px;background:var(--primary);display:grid;place-items:center;color:#fff;opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease}
+      .scroll-up.show{opacity:1;pointer-events:auto;transform:translateY(-4px)}
+    </style>
+  </head>
+
+  <body>
+ 
+    <header class="header" id="header">
+      <nav class="nav container" aria-label="Primary">
+        <a href="#home" class="nav__logo">JISHNU <span>M</span></a>
+        <ul class="nav__list" role="menubar">
+          <li role="none"><a role="menuitem" href="#home" class="nav__link">Home</a></li>
+          <li role="none"><a role="menuitem" href="#about" class="nav__link">About</a></li>
+          <li role="none"><a role="menuitem" href="#skills" class="nav__link">Skills</a></li>
+          <li role="none"><a role="menuitem" href="#services" class="nav__link">Services</a></li>
+          <li role="none"><a role="menuitem" href="#projects" class="nav__link">Projects</a></li>
+          <li role="none"><a role="menuitem" href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+        <div class="nav__actions">
+          <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"><i id="theme-icon" class="ri-sun-line"></i></button>
+          <a class="btn btn--primary" href="assets/files/CV.pdf" download="JishnuM-MERN.pdf"><i class="ri-download-2-line"></i> CV</a>
+        </div>
+      </nav>
+    </header>
+
+    <section id="home" class="section hero">
+      <div class="container hero__grid">
+        <div>
+          <span class="pill"><i class="ri-terminal-box-line"></i> MERN Stack Developer</span>
+          <h1 class="hero__title">Hi, I'm <span style="background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">Jishnu M</span></h1>
+          <p class="hero__desc">I build dynamic, scalable web apps using MongoDB, Express, React and Node. Trained at Zoople Technologies; 4‑month internship at Rootments building real products.</p>
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <a href="#projects" class="btn btn--primary"><i class="ri-rocket-line"></i> View Projects</a>
+            <a href="#contact" class="btn"><i class="ri-mail-line"></i> Let's Talk</a>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:14px">
+            <a href="https://github.com/jishnuMgit" class="social" target="_blank" aria-label="GitHub"><i class="ri-github-fill"></i></a>
+            <a href="https://www.linkedin.com/in/jishnu-m-11760b2b0/" class="social" target="_blank" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+            <a href="https://www.instagram.com/j_i_s_h_n_u__m/" class="social" target="_blank" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+          </div>
+        </div>
+
+        <div class="hero__image">
+          <div class="blob">
+            <img src="assets/img/file (1).png" alt="Portrait of Jishnu M"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container about">
+        <div class="about__card">
+          <h2 class="title">About Me</h2>
+          <p class="subtitle">I create end‑to‑end products: clean UI, solid APIs, optimized databases.</p>
+          <p>As a MERN stack developer, I work across front‑end and back‑end to deliver reliable, performant applications. I focus on developer ergonomics, component reusability, and production‑grade patterns like authentication, state management and CI/CD basics.</p>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <a class="btn" href="#projects"><i class="ri-eye-line"></i> See Work</a>
+            <a class="btn" href="mailto:jishnum77701@gmail.com"><i class="ri-mail-send-line"></i> Email</a>
+          </div>
+        </div>
+        <div class="about__card">
+          <h3 class="title">Highlights</h3>
+          <ul style="margin:0;padding-left:18px">
+            <li>Built LMS with training modules, progress tracking & escalations.</li>
+            <li>E‑commerce app with auth, product catalog & cart/checkout.</li>
+            <li>Financial dashboard for expense tracking and reports.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container skills">
+        <div>
+          <h2 class="title">My Skills</h2>
+          <p class="subtitle">Comfortable across the MERN stack and modern tooling.</p>
+        </div>
+        <div class="skills__wrap">
+          <div class="about__card">
+            <h3 class="title" style="font-size:1.05rem">Core</h3>
+            <div class="chipset">
+              <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+              <span class="chip">React</span><span class="chip">Redux</span><span class="chip">Node.js</span>
+              <span class="chip">Express</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="about__card">
+            <h3 class="title" style="font-size:1.05rem">Tools & Extras</h3>
+            <div class="chipset">
+              <span class="chip">Git & GitHub</span><span class="chip">Tailwind</span><span class="chip">Bootstrap</span>
+              <span class="chip">REST APIs</span><span class="chip">React Native (basic)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="title">What I Do</h2>
+        <p class="subtitle">End‑to‑end development with a focus on UX and reliability.</p>
+        <div class="grid services">
+          <article class="card">
+            <i class="ri-layout-3-line"></i>
+            <h3 class="title" style="font-size:1.05rem">Web Development</h3>
+            <p>Custom web applications using modern stacks and best practices.</p>
+          </article>
+          <article class="card">
+            <i class="ri-pantone-line"></i>
+            <h3 class="title" style="font-size:1.05rem">Technologies</h3>
+            <p>MongoDB, Express, React, Node + popular UI libs and state tools.</p>
+          </article>
+          <article class="card">
+            <i class="ri-pen-nib-fill"></i>
+            <h3 class="title" style="font-size:1.05rem">Product Work</h3>
+            <p>Feature development, integrations, and scalable API/back‑end design.</p>
+          </article>
+          <article class="card">
+            <i class="ri-team-fill"></i>
+            <h3 class="title" style="font-size:1.05rem">Team</h3>
+            <p>Collaborative, feedback‑driven approach with clear communication.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="title">Recent Projects</h2>
+        <p class="subtitle">A few shipped builds and experiments.</p>
+        <div class="grid projects-grid">
+        Fix the .png.png path in your assets folder if needed 
+          <article class="card project">
+            <div class="project__media"><img src="assets/img/Screenshot 2024-05-20 145352.png" alt="Nike landing page clone"/></div>
+            <div class="project__body">
+              <h3 class="project__title">Nike Website Clone</h3>
+              <p class="project__desc">Responsive landing page built with semantic HTML & CSS.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+                <a class="btn" href="https://github.com/jishnuMgit/nike" target="_blank"><i class="ri-github-fill"></i> Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__media"><img src="assets/img/pj2.png" alt="MERN e‑commerce"/></div>
+            <div class="project__body">
+              <h3 class="project__title">E‑Commerce App (MERN)</h3>
+              <p class="project__desc">Auth, products, cart, and basic checkout flows.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+                <a class="btn" href="https://github.com/jishnuMgit/mern-ecommerce" target="_blank"><i class="ri-github-fill"></i> Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__media"><img src="assets/img/pj3.png" alt="Advanced Todo app"/></div>
+            <div class="project__body">
+              <h3 class="project__title">Advanced To‑Do (React)</h3>
+              <p class="project__desc">Filters, local storage, and modular components.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+                <a class="btn" href="https://github.com/jishnuMgit/todo" target="_blank"><i class="ri-github-fill"></i> Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__media"><img src="assets/img/pj1.png" alt="Twitter clone"/></div>
+            <div class="project__body">
+              <h3 class="project__title">Twitter Clone (MERN)</h3>
+              <p class="project__desc">Tweets, comments, profiles and JWT auth.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+                <a class="btn btn--primary" href="https://twitter-front.onrender.com/" target="_blank"><i class="ri-global-line"></i> Live</a>
+                <a class="btn" href="https://github.com/jishnuMgit/twitter-clone" target="_blank"><i class="ri-github-fill"></i> Code</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div style="margin-top:16px;text-align:center">
+          <a href="/Project.html" class="btn"><i class="ri-folder-2-line"></i> View all Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact__grid">
+        <div>
+          <h2 class="title">Contact Me</h2>
+          <p class="subtitle">Have a project or a question? Let's build something great.</p>
+          <div style="display:flex;gap:10px">
+            <a class="btn" href="mailto:jishnum77701@gmail.com"><i class="ri-mail-send-line"></i> Email</a>
+            <a class="btn" href="https://github.com/jishnuMgit" target="_blank"><i class="ri-github-fill"></i> GitHub</a>
+          </div>
+        </div>
+        <form class="form" id="contact-form">
+          <div class="form__row">
+            <input class="input" type="text" name="user_name" placeholder="Your name" required />
+            <input class="input" type="email" name="user_email" placeholder="Email address" required />
+          </div>
+          <textarea class="input" name="user_message" placeholder="Your message" required></textarea>
+          <p id="contact-message" class="subtitle" style="min-height: 1.2em"></p>
+          <button type="submit" class="btn btn--primary"><i class="ri-send-plane-fill"></i> Send</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer__top">
+        <h3 class="title" style="margin:0">Jishnu <span style="background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">M</span></h3>
+        <p class="subtitle">BCA • MERN Stack Developer</p>
+        <div style="display:flex;gap:10px;margin:8px 0 0">
+          <a href="https://www.facebook.com/JISHNUM77701/" target="_blank" class="social" aria-label="Facebook"><i class="ri-facebook-circle-fill"></i></a>
+          <a href="https://www.instagram.com/j_i_s_h_n_u__m/" target="_blank" class="social" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+          <a href="https://x.com/bigilbro123" target="_blank" class="social" aria-label="X"><i class="ri-twitter-fill"></i></a>
+        </div>
+        <small class="copy">© 2025 Jishnu M. All rights reserved</small>
+      </div>
+    </footer>
+
+    <a href="#home" id="scroll-up" class="scroll-up" aria-label="Scroll to top"><i class="ri-arrow-up-line"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script>
+      // Theme toggle
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const applyTheme = (mode)=>{root.setAttribute('data-theme',mode);localStorage.setItem('theme',mode);themeIcon.className = mode==='light'?'ri-moon-line':'ri-sun-line'}
+      const saved = localStorage.getItem('theme');
+      if(saved) applyTheme(saved); else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
+      themeBtn.addEventListener('click',()=>applyTheme(root.getAttribute('data-theme')==='light'?'dark':'light'))
+
+      // Scroll up button
+      const su = document.getElementById('scroll-up');
+      const onScroll=()=>{ if(window.scrollY>300) su.classList.add('show'); else su.classList.remove('show'); }
+      document.addEventListener('scroll', onScroll);
+
+      // EmailJS (replace with your public key & template)
+      const form = document.getElementById('contact-form');
+      const msg = document.getElementById('contact-message');
+      if(window.emailjs){
+        emailjs.init('REPLACE_WITH_PUBLIC_KEY'); // <-- Replace
+        form?.addEventListener('submit', async (e)=>{
+          e.preventDefault();
+          msg.textContent = 'Sending…';
+          try{
+            await emailjs.send('REPLACE_SERVICE_ID','REPLACE_TEMPLATE_ID',{
+              from_name: form.user_name.value,
+              reply_to: form.user_email.value,
+              message: form.user_message.value,
+            });
+            msg.textContent = 'Message sent! I will reply soon.';
+            form.reset();
+          }catch(err){
+            console.error(err); msg.textContent='Failed to send. Please email me directly.';
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
+-->

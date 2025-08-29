@@ -1,4 +1,383 @@
+
+
 <!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jishnu M — Portfolio</title>
+
+    <!-- Remix Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- Styles (single-file for easy drop-in). If you prefer external files, move this to assets/css/styles.css) -->
+    <style>
+      :root {
+        --bg: #0b0d10;
+        --bg-soft: #111418;
+        --card: #141922;
+        --card-raise: #1a2130;
+        --text: #e7ecf3;
+        --muted: #a2afc2;
+        --primary: #7c5cff;
+        --primary-600: #6a48ff;
+        --primary-700: #5a3bff;
+        --accent: #2dd4bf;
+        --border: #253046;
+        --ring: rgba(124, 92, 255, 0.35);
+        --gradient: linear-gradient(135deg, var(--primary) 0%, #22d3ee 100%);
+        --radius: 16px;
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        --shadow-soft: 0 8px 16px rgba(0, 0, 0, 0.25);
+        --container: 1100px;
+      }
+      [data-theme="light"] {
+        --bg: #f6f7fb;
+        --bg-soft: #ffffff;
+        --card: #ffffff;
+        --card-raise: #f6f8ff;
+        --text: #0d1320;
+        --muted: #475569;
+        --primary: #6d28d9;
+        --primary-600: #5b21b6;
+        --primary-700: #4c1d95;
+        --accent: #0ea5e9;
+        --border: #e5e7eb;
+        --ring: rgba(109, 40, 217, 0.25);
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        --shadow-soft: 0 8px 16px rgba(0, 0, 0, 0.06);
+      }
+
+      /* Reset */
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: radial-gradient(1200px 600px at 70% -10%, rgba(124,92,255,.15), transparent 55%),
+          radial-gradient(900px 500px at -10% 10%, rgba(34,211,238,.12), transparent 55%),
+          var(--bg);
+        line-height: 1.6;
+      }
+      a { color: inherit; text-decoration: none; }
+      img { display: block; max-width: 100%; height: auto; }
+      .container { width: min(100%, var(--container)); margin-inline: auto; padding-inline: 20px; }
+
+     
+      /* Header */
+      .header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px); background: color-mix(in oklab, var(--bg-soft) 70%, transparent); border-bottom: 1px solid var(--border); }
+      .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+      .nav__logo { font-weight: 800; letter-spacing: .5px; font-size: 1.15rem; display: inline-flex; gap: 6px; align-items: center; }
+      .nav__logo span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .nav__list { list-style: none; display: flex; gap: 16px; padding: 0; margin: 0; }
+      .nav__link { padding: 8px 12px; border-radius: 10px; color: var(--muted); }
+      .nav__link:hover { color: var(--text); background: color-mix(in oklab, var(--border) 40%, transparent); }
+      .nav__actions { display: flex; align-items: center; gap: 10px; }
+      .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-soft); box-shadow: var(--shadow-soft); cursor: pointer; }
+      .icon-btn:hover { border-color: color-mix(in oklab, var(--border) 60%, var(--primary)); box-shadow: 0 0 0 6px var(--ring); }
+
+      /* Hero */
+      .hero { padding: 60px 0 10px; }
+      .hero__wrap { display: grid; gap: 18px; align-items: start; }
+      .hero__title { font-size: clamp(1.6rem, 2.8vw, 2.25rem); font-weight: 800; letter-spacing: .4px; }
+      .hero__subtitle { color: var(--muted); font-size: 0.98rem; max-width: 60ch; }
+      .pill { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); background: color-mix(in oklab, var(--bg-soft) 70%, transparent); padding:6px 10px; border-radius: 999px; color: var(--muted); font-size: 0.9rem; }
+      .pill i { font-size: 1.1rem; color: var(--accent); }
+
+      /* Section */
+      .section { padding: 34px 50px 64px; }
+      .section__title { font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin: 0 0 18px; }
+
+      /* Projects Grid */
+      .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 18px; }
+
+      .card { position: relative; display: grid; grid-template-rows: 170px auto; border: 1px solid var(--border); background: linear-gradient(180deg, color-mix(in oklab, var(--card) 92%, transparent), color-mix(in oklab, var(--card-raise) 92%, transparent)); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+      .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in oklab, var(--border) 60%, var(--primary)); }
+
+      .card__media { position: relative; overflow: hidden; background: #0f131a; }
+      .card__media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); transition: transform .35s ease; }
+      .card:hover .card__media img { transform: scale(1.06); }
+
+      .card__body { padding: 14px; display: grid; gap: 10px; }
+      .card__title { margin: 0; font-size: 1.05rem; letter-spacing: .2px; }
+      .card__desc { margin: 0; color: var(--muted); font-size: .95rem; }
+
+      .badges { display:flex; flex-wrap: wrap; gap: 6px; }
+      .badge { font-size: .75rem; padding: 4px 8px; border-radius: 999px; border:1px solid var(--border); color: var(--muted); background: color-mix(in oklab, var(--bg-soft) 80%, transparent); }
+
+      .actions { display:flex; gap: 10px; margin-top: 2px; }
+      .btn { display:inline-flex; align-items:center; gap:8px; padding: 8px 12px; border-radius: 12px; border:1px solid var(--border); background: var(--bg-soft); color: var(--text); font-weight: 600; font-size: .92rem; }
+      .btn i { font-size: 1.05rem; }
+      .btn:hover { border-color: color-mix(in oklab, var(--border) 50%, var(--primary)); box-shadow: 0 0 0 6px var(--ring); }
+      .btn--primary { background: var(--gradient); border-color: transparent; }
+
+      /* Footer */
+      .footer { border-top:1px solid var(--border); background: color-mix(in oklab, var(--bg-soft) 75%, transparent); padding: 32px 0 48px; }
+      .footer__top { display:grid; gap: 8px; }
+      .footer h2 { margin: 0; font-size: 1.1rem; }
+      .footer p { margin: 0; color: var(--muted); }
+      .footer__social { display:flex; gap: 12px; margin-top: 12px; }
+      .social { width: 40px; height: 40px; display:inline-flex; align-items:center; justify-content:center; border-radius: 12px; border:1px solid var(--border); background: var(--bg-soft); }
+      .social:hover { border-color: color-mix(in oklab, var(--border) 50%, var(--primary)); box-shadow: 0 0 0 6px var(--ring); }
+      .footer small { color: var(--muted); display:block; margin-top: 18px; }
+
+      /* Responsive tweaks */
+      @media (min-width: 860px) {
+        .hero__wrap { grid-template-columns: 1.2fr .8fr; align-items: center; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <nav class="nav container" aria-label="Primary">
+        <a href="/index.html" class="nav__logo" aria-label="Home">
+          JISHNU <span>M</span>
+        </a>
+        <ul class="nav__list" role="menubar">
+          <li role="none"><a role="menuitem" href="/index.html" class="nav__link">Home</a></li>
+          <!-- <li role="none"><a role="menuitem" href="#projects" class="nav__link">Projects</a></li> -->
+          <!-- <li role="none"><a role="menuitem" href="#contact" class="nav__link">Contact</a></li> -->
+        </ul>
+        <div class="nav__actions">
+          <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"><i class="ri-sun-line" id="theme-icon"></i></button>
+          <a class="btn btn--primary" href="https://github.com/jishnuMgit" target="_blank" rel="noopener"><i class="ri-github-fill"></i> GitHub</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero container">
+      <div class="hero__wrap">
+        <div>
+          <span class="pill"><i class="ri-terminal-box-line"></i> BCA Graduate • MERN Stack Developer</span>
+          <h1 class="hero__title">Hi, I'm <span style="background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent">Jishnu M</span>. I build clean, fast web apps and delightful UIs.</h1>
+          <p class="hero__subtitle">Hands-on with React, Node, Express, and MongoDB. I enjoy turning ideas into real products: e‑commerce, training systems, dashboards, and more.</p>
+          <div class="actions" style="margin-top:10px">
+            <a class="btn btn--primary" href="#projects"><i class="ri-rocket-line"></i> Explore Projects</a>
+            <a class="btn" href="mailto:mjishnu990@gmail.com"><i class="ri-mail-line"></i> Contact Me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <main id="projects" class="section container">
+      <h2 class="section__title">Featured Projects</h2>
+
+      <div class="projects-grid">
+        <!-- Each project card. Keep image paths from your assets. -->
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/Screenshot 2024-05-20 145352.png" alt="Nike landing page clone screenshot" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Nike Website Clone</h3>
+            <p class="card__desc">Responsive Nike‑inspired landing page using semantic HTML & modern CSS.</p>
+            <div class="badges"><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">Responsive</span></div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/jishnuMgit/nike" target="_blank" rel="noopener"><i class="ri-github-fill"></i> View Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/Screenshot 2024-05-20 145352.png.png" alt="Netflix clone UI" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Netflix Website Clone</h3>
+            <p class="card__desc">React clone powered by TMDb API with smooth UI animations.</p>
+            <div class="badges"><span class="badge">React</span><span class="badge">API</span></div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/jishnuMgit/Netflixs" target="_blank" rel="noopener"><i class="ri-github-fill"></i> View Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/pj2.png" alt="MERN e‑commerce app" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">E‑Commerce Web App (MERN)</h3>
+            <p class="card__desc">Full‑stack storefront with authentication, product pages, and cart.</p>
+            <div class="badges"><span class="badge">MongoDB</span><span class="badge">Express</span><span class="badge">React</span><span class="badge">Node</span></div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/jishnuMgit/mern-ecommerce" target="_blank" rel="noopener"><i class="ri-github-fill"></i> View Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/pj3.png" alt="Advanced To‑Do app UI" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Advanced To‑Do App (React)</h3>
+            <p class="card__desc">Task manager with filters, local storage, and modular UI.</p>
+            <div class="badges"><span class="badge">React</span><span class="badge">LocalStorage</span></div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/jishnuMgit/todo" target="_blank" rel="noopener"><i class="ri-github-fill"></i> View Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/pj1.png" alt="Twitter clone timeline" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Twitter Clone (MERN)</h3>
+            <p class="card__desc">Tweets, comments, profiles and JWT auth. Hosted frontend demo.</p>
+            <div class="badges"><span class="badge">MERN</span><span class="badge">JWT</span></div>
+            <div class="actions">
+              <a class="btn btn--primary" href="https://twitter-front.onrender.com/" target="_blank" rel="noopener"><i class="ri-global-line"></i> Live</a>
+              <a class="btn" href="https://github.com/jishnuMgit/twitter-clone" target="_blank" rel="noopener"><i class="ri-github-fill"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/img1/Screenshot 2024-12-19 092352.png" alt="Unique code generator dashboard" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Unique Code Generator</h3>
+            <p class="card__desc">Secure alphanumeric generator with MongoDB storage and UI.</p>
+            <div class="badges"><span class="badge">Node</span><span class="badge">MongoDB</span></div>
+            <div class="actions">
+              <a class="btn btn--primary" href="http://warehouse.rootments.live/" target="_blank" rel="noopener"><i class="ri-global-line"></i> Live</a>
+              <a class="btn" href="https://github.com/jishnuMgit/UniCode" target="_blank" rel="noopener"><i class="ri-github-fill"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/img1/Screenshot 2025-01-11 171505.png" alt="LMS dashboard" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Employee LMS (MERN)</h3>
+            <p class="card__desc">Training modules, progress tracking, and automated escalations.</p>
+            <div class="badges"><span class="badge">MERN</span><span class="badge">Admin</span></div>
+            <div class="actions">
+              <a class="btn btn--primary" href="https://lms.rootments.live/" target="_blank" rel="noopener"><i class="ri-global-line"></i> Live</a>
+              <a class="btn" href="https://github.com/jishnuMgit/LMS" target="_blank" rel="noopener"><i class="ri-github-fill"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/img1/Screenshot 2025-04-07 161912.png" alt="Suitor Guy website" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Suitor Guy Website</h3>
+            <p class="card__desc">React site for a men’s fashion brand with sleek UI.</p>
+            <div class="badges"><span class="badge">React</span><span class="badge">Design</span></div>
+            <div class="actions">
+              <a class="btn btn--primary" href="https://suitorguy.com/" target="_blank" rel="noopener"><i class="ri-global-line"></i> Live</a>
+              <a class="btn" href="https://github.com/jishnuMgit/suitorguy" target="_blank" rel="noopener"><i class="ri-github-fill"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/img1/Screenshot 2025-04-07 124641.png" alt="RootFin system" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Financial System (MERN)</h3>
+            <p class="card__desc">Track expenses, generate reports, and manage finances.</p>
+            <div class="badges"><span class="badge">MERN</span><span class="badge">Analytics</span></div>
+            <div class="actions">
+              <a class="btn btn--primary" href="https://rootfin.rootments.live/" target="_blank" rel="noopener"><i class="ri-global-line"></i> Live</a>
+              <a class="btn" href="https://github.com/jishnuMgit/rootfin" target="_blank" rel="noopener"><i class="ri-github-fill"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/Screenshot 2024-06-01 201000.png" alt="Simple calculator app" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Simple Calculator</h3>
+            <p class="card__desc">Basic calculator with JavaScript and responsive layout.</p>
+            <div class="badges"><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JS</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/Screenshot 2024-06-01 200215.png" alt="Form validation UI" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Form Validation</h3>
+            <p class="card__desc">jQuery validation with error feedback and subtle animations.</p>
+            <div class="badges"><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">jQuery</span></div>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+      <div class="container footer__top">
+        <h2>Jishnu M</h2>
+        <p>BCA Graduate • MERN Stack Developer</p>
+        <div class="footer__social">
+          <a class="social" href="https://www.facebook.com/JISHNUM77701/" target="_blank" aria-label="Facebook"><i class="ri-facebook-circle-fill"></i></a>
+          <a class="social" href="https://www.instagram.com/j_i_s_h_n_u__m/" target="_blank" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+          <a class="social" href="https://x.com/bigilbro123" target="_blank" aria-label="Twitter / X"><i class="ri-twitter-fill"></i></a>
+          <a class="social" href="https://github.com/jishnuMgit" target="_blank" aria-label="GitHub"><i class="ri-github-fill"></i></a>
+        </div>
+        <small>© 2025 Jishnu M. All Rights Reserved</small>
+      </div>
+    </footer>
+
+    <script>
+      // Theme toggle with localStorage
+      const themeBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const root = document.documentElement;
+
+      const applyTheme = (mode) => {
+        root.setAttribute('data-theme', mode);
+        localStorage.setItem('theme', mode);
+        themeIcon.className = mode === 'light' ? 'ri-moon-line' : 'ri-sun-line';
+      };
+
+      const saved = localStorage.getItem('theme');
+      if (saved) applyTheme(saved);
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        applyTheme('light');
+      }
+
+      themeBtn.addEventListener('click', () => {
+        const mode = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        applyTheme(mode);
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -23,60 +402,60 @@
     <section class="projects section container">
       <h2 class="section__title">My Projects</h2>
 
-      <!-- Project 1 -->
-      <div class="project">
+      Project 1 -->
+      <!-- <div class="project">
         <img src="./assets/img/Screenshot 2024-05-20 145352.png" alt="Nike Clone" class="project__image" />
         <div class="project__info">
           <h3>Nike Website Clone</h3>
           <p>Responsive Nike-inspired landing page using HTML & CSS.</p>
           <div class="project__links">
-            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+          <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> --
             <a href="https://github.com/jishnuMgit/nike" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 2 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/Screenshot 2024-05-20 145352.png.png" alt="Netflix Clone" class="project__image" />
         <div class="project__info">
           <h3>Netflix Website Clone</h3>
           <p>React-based clone with TMDb API, UI/UX animations.</p>
           <div class="project__links">
-            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+             <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> 
             <a href="https://github.com/jishnuMgit/Netflixs" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 3 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/pj2.png" alt="E-commerce" class="project__image" />
         <div class="project__info">
           <h3>E-Commerce Web App (MERN)</h3>
           <p>Full-stack shop site with authentication and cart system.</p>
           <div class="project__links">
-            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+           <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -
             <a href="https://github.com/jishnuMgit/mern-ecommerce" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 4 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/pj3.png" alt="To-Do App" class="project__image" />
         <div class="project__info">
           <h3>Advanced To-Do App (React)</h3>
           <p>Task manager with filters, local storage, and modular UI.</p>
           <div class="project__links">
-            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+           <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> --
             <a href="https://github.com/jishnuMgit/todo" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 5 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/pj1.png" alt="Twitter Clone" class="project__image" />
         <div class="project__info">
           <h3>Twitter Clone (MERN)</h3>
@@ -86,10 +465,10 @@
             <a href="https://github.com/jishnuMgit/twitter-clone" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 6 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/img1/Screenshot 2024-12-19 092352.png" alt="Code Generator" class="project__image" />
         <div class="project__info">
           <h3>Unique Code Generator</h3>
@@ -99,10 +478,10 @@
             <a href="https://github.com/jishnuMgit/UniCode" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 7 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/img1/Screenshot 2025-01-11 171505.png" alt="LMS" class="project__image" />
         <div class="project__info">
           <h3>Employee LMS (MERN)</h3>
@@ -112,10 +491,10 @@
             <a href="https://github.com/jishnuMgit/LMS" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 8 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/img1/Screenshot 2025-04-07 161912.png" alt="Suitor Guy" class="project__image" />
         <div class="project__info">
           <h3>Suitor Guy Website</h3>
@@ -125,10 +504,10 @@
             <a href="https://github.com/jishnuMgit/suitorguy" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 9 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/img1/Screenshot 2025-04-07 124641.png" alt="Financial System" class="project__image" />
         <div class="project__info">
           <h3>Financial System (MERN)</h3>
@@ -138,31 +517,31 @@
             <a href="https://github.com/jishnuMgit/rootfin" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 10 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/Screenshot 2024-06-01 201000.png" alt="Calculator" class="project__image" />
         <div class="project__info">
           <h3>Simple Calculator</h3>
           <p>Basic calculator with JavaScript and responsive layout.</p>
           <div class="project__links">
-            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
-            <a href="#" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a> -->
+            <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
+            <a href="#" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a> 
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 11 -->
-      <div class="project">
+      <!-- <div class="project">
         <img src="./assets/img/Screenshot 2024-06-01 200215.png" alt="Form Validation" class="project__image" />
         <div class="project__info">
           <h3>Form Validation</h3>
           <p>JS & jQuery validation with error feedback and animations.</p>
           <div class="project__links">
-            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a>
-            <a href="#" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a> -->
-          </div>
+            <a href="#" class="project__btn" target="_blank"><i class="ri-global-line"></i> View Project</a> -->
+            <!-- <a href="#" class="project__btn" target="_blank"><i class="ri-github-fill"></i> View Code</a> -->
+          <!-- </div>
         </div>
       </div>
 
@@ -183,4 +562,5 @@
 
   <script src="assets/js/main.js"></script>
 </body>
-</html>
+</html>  -->
+
