@@ -70,7 +70,7 @@
 
      
       /* Header */
-      .header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px); background: color-mix(in oklab, var(--bg-soft) 70%, transparent); border-bottom: 1px solid var(--border); }
+      .header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px); background: color-mix(in oklab, var(--bg-soft) 70%, transparent); border-bottom: 1px solid var(--border);}
       .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
       .nav__logo { font-weight: 800; letter-spacing: .5px; font-size: 1.15rem; display: inline-flex; gap: 6px; align-items: center; }
       .nav__logo span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -78,11 +78,11 @@
       .nav__link { padding: 8px 12px; border-radius: 10px; color: var(--muted); }
       .nav__link:hover { color: var(--text); background: color-mix(in oklab, var(--border) 40%, transparent); }
       .nav__actions { display: flex; align-items: center; gap: 10px; }
-      .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-soft); box-shadow: var(--shadow-soft); cursor: pointer; }
-      .icon-btn:hover { border-color: color-mix(in oklab, var(--border) 60%, var(--primary)); box-shadow: 0 0 0 6px var(--ring); }
+      .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-soft); box-shadow: var(--shadow-soft); cursor: pointer; color: gray; }
+      .icon-btn:hover { border-color: color-mix(in oklab, var(--border) 60%, var(--primary)); box-shadow: 0 0 0 6px var(--ring);  }
 
       /* Hero */
-      .hero { padding: 60px 0 10px; }
+      .hero { padding: 60px 0 10px; margin: 10px; }
       .hero__wrap { display: grid; gap: 18px; align-items: start; }
       .hero__title { font-size: clamp(1.6rem, 2.8vw, 2.25rem); font-weight: 800; letter-spacing: .4px; }
       .hero__subtitle { color: var(--muted); font-size: 0.98rem; max-width: 60ch; }
@@ -94,9 +94,13 @@
       .section__title { font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin: 0 0 18px; }
 
       /* Projects Grid */
-      .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 18px; }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* smaller min */
+  gap: 60px;
+}
 
-      .card { position: relative; display: grid; grid-template-rows: 170px auto; border: 1px solid var(--border); background: linear-gradient(180deg, color-mix(in oklab, var(--card) 92%, transparent), color-mix(in oklab, var(--card-raise) 92%, transparent)); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+      .card { position: relative; display: grid; grid-template-rows: 200px auto; border: 1px solid var(--border); background: linear-gradient(180deg, color-mix(in oklab, var(--card) 92%, transparent), color-mix(in oklab, var(--card-raise) 92%, transparent)); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
       .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in oklab, var(--border) 60%, var(--primary)); }
 
       .card__media { position: relative; overflow: hidden; background: #0f131a; }
@@ -173,7 +177,34 @@
 
       <div class="projects-grid">
         <!-- Each project card. Keep image paths from your assets. -->
-
+ <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/Screenshot 2025-09-18 111040.png" alt="Nike landing page clone screenshot" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Nike Website Clone</h3>
+            <p class="card__desc">Responsive Nike‑inspired landing page using semantic HTML & modern CSS.</p>
+            <div class="badges"><span class="badge">React</span><span class="badge">Tailwind</span><span class="badge">Node</span> <span class="badge">prisma</span><span class="badge">ExpressJS</span><span class="badge">TypeScript</span></div>
+            <div class="actions">
+ <button class="btn" disabled style="opacity:0.6;cursor:not-allowed;">
+    <i class="ri-lock-fill"></i> Private Repo
+  </button>            </div>
+          </div>
+        </article>
+         <article class="card">
+          <div class="card__media">
+            <img src="./assets/img/Screenshot 2025-09-18 111108.png" alt="Nike landing page clone screenshot" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Nike Website Clone</h3>
+            <p class="card__desc">Responsive Nike‑inspired landing page using semantic HTML & modern CSS.</p>
+            <div class="badges"><span class="badge">React</span><span class="badge">Tailwind</span><span class="badge">Node</span> <span class="badge">prisma</span><span class="badge">NustJs</span><span class="badge">TypeScript</span></div>
+            <div class="actions">
+ <button class="btn" disabled style="opacity:0.6;cursor:not-allowed;">
+    <i class="ri-lock-fill"></i> Private Repo
+  </button>            </div>
+          </div>
+        </article>
         <article class="card">
           <div class="card__media">
             <img src="./assets/img/Screenshot 2024-05-20 145352.png" alt="Nike landing page clone screenshot" />

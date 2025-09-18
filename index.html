@@ -140,7 +140,7 @@ margin-left: 50px;
       .nav__link{padding:8px 10px;border-radius:10px;color:var(--muted)}
       .nav__link:hover{color:var(--text);background:color-mix(in oklab, var(--border) 40%, transparent)}
       .nav__actions{display:flex;align-items:center;gap:10px}
-      .icon-btn{width:40px;height:40px;border:1px solid var(--border);border-radius:12px;background:var(--bg-soft);display:inline-flex;align-items:center;justify-content:center}
+      .icon-btn{width:40px;height:40px;border:1px solid var(--border);border-radius:12px;background:var(--bg-soft);display:inline-flex;align-items:center;justify-content:center;color: gray;}
       .icon-btn:hover{border-color:color-mix(in oklab, var(--border) 55%, var(--primary));box-shadow:0 0 0 6px var(--ring)}
 
       /* =====================
@@ -155,10 +155,11 @@ margin-left: 50px;
 .blob img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* or cover for tighter fill */
-  margin-top: 15px; /* reduced top margin so it sits bigger */
-  transform: scale(1.1); /* make it 10% bigger */
+  object-fit: cover;   /* fills the blob naturally */
+  margin: 0;           /* no forced top margin */
+  transform: none;     /* no scaling */
 }
+
       @media (min-width: 900px){.hero__grid{grid-template-columns:1.1fr .9fr}}
 
       /* =====================
@@ -277,7 +278,7 @@ margin-left: 50px;
 
         <div class="hero__image">
           <div class="blob">
-            <img src="assets/img/file (1).png" alt="Portrait of Jishnu M"/>
+            <img src="assets/img/WhatsApp Image 2025-09-14 at 12.06.06_b3fc2f04.jpg" alt="Portrait of Jishnu M"/>
           </div>
         </div>
       </div>
@@ -379,6 +380,32 @@ margin-left: 50px;
         <p class="subtitle">A few shipped builds and experiments.</p>
         <div class="grid projects-grid">
           <!-- Fix the .png.png path in your assets folder if needed -->
+            <article class="card project">
+            <div class="project__media"><img src="assets/img/Screenshot 2025-09-18 111040.png" alt="Nike landing page clone"/></div>
+            <div class="project__body">
+              <h3 class="project__title">Sales Module</h3>
+              <p class="project__desc">Sales module for managing transactions and customer records.</p>
+              <div style="display:flex;gap:10px;margin-top:8px">
+  <button class="btn" disabled style="opacity:0.6;cursor:not-allowed;">
+    <i class="ri-lock-fill"></i> Private Repo
+  </button>
+</div>
+
+            </div>
+          </article>
+           <article class="card project">
+            <div class="project__media"><img src="assets/img/Screenshot 2025-09-18 111108.png" alt="Nike landing page clone"/></div>
+            <div class="project__body">
+              <h3 class="project__title">restaurants management</h3>
+              <p class="project__desc">Restaurant management module for orders, staff, and customer service.</p>
+             <div style="display:flex;gap:10px;margin-top:8px">
+  <button class="btn" disabled style="opacity:0.6;cursor:not-allowed;">
+    <i class="ri-lock-fill"></i> Private Repo
+  </button>
+</div>
+
+            </div>
+          </article>
           <article class="card project">
             <div class="project__media"><img src="assets/img/Screenshot 2024-05-20 145352.png" alt="Nike landing page clone"/></div>
             <div class="project__body">
@@ -538,6 +565,29 @@ toggle.addEventListener("click", () => {
     : '<i class="ri-menu-line"></i>';
 });
 </script>
+ <script>
+      // Theme toggle with localStorage
+      const themeBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const root = document.documentElement;
+
+      const applyTheme = (mode) => {
+        root.setAttribute('data-theme', mode);
+        localStorage.setItem('theme', mode);
+        themeIcon.className = mode === 'light' ? 'ri-moon-line' : 'ri-sun-line';
+      };
+
+      const saved = localStorage.getItem('theme');
+      if (saved) applyTheme(saved);
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        applyTheme('light');
+      }
+
+      themeBtn.addEventListener('click', () => {
+        const mode = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        applyTheme(mode);
+      });
+    </script>
 <script src="assets/js/main.js"></script>
 
   </body>
