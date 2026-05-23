@@ -224,6 +224,89 @@ margin-left: 50px;
       .scroll-up{position:fixed;right:16px;bottom:18px;width:44px;height:44px;border-radius:12px;background:var(--primary);display:grid;place-items:center;color:#fff;opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease}
       .scroll-up.show{opacity:1;pointer-events:auto;transform:translateY(-4px)}
     </style>
+    <!-- Remix Icon CDN -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet"/>
+
+<style>
+  *{
+    cursor:none;
+  }
+
+  .cursor{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    position:fixed;
+    pointer-events:none;
+    z-index:9999;
+    background:linear-gradient(45deg,#00ffff,#ff00ff,#00ff88);
+    box-shadow:0 0 20px #00ffff;
+    transform:translate(-50%,-50%);
+    animation:hue 3s linear infinite;
+  }
+
+  @keyframes hue{
+    100%{
+      filter:hue-rotate(360deg);
+    }
+  }
+
+  .trail-icon{
+    position:fixed;
+    pointer-events:none;
+    z-index:9998;
+    font-size:20px;
+    animation:float 1s linear forwards;
+  }
+
+  @keyframes float{
+    0%{
+      opacity:1;
+      transform:translate(-50%,-50%) scale(1);
+    }
+    100%{
+      opacity:0;
+      transform:translate(-50%,-100px) scale(2) rotate(360deg);
+    }
+  }
+</style>
+
+<div class="cursor"></div>
+
+<script>
+  const cursor = document.querySelector(".cursor");
+
+  const icons = [
+    "⚛️",      // React
+    "TS",      // TypeScript
+    "🌬️",      // Tailwind
+    "🟢",      // Node.js
+    "🔺",      // Prisma ORM
+    "🛡️",      // NestJS
+    "🐬",      // MySQL
+    "🍃",      // MongoDB
+    "🌐",      // HTML
+    "🎨"       // CSS
+  ];
+  document.addEventListener("mousemove",(e)=>{
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+    const icon = document.createElement("div");
+    icon.className = "trail-icon";
+
+    icon.innerText = icons[Math.floor(Math.random()*icons.length)];
+
+    icon.style.left = e.clientX + "px";
+    icon.style.top = e.clientY + "px";
+
+    document.body.appendChild(icon);
+
+    setTimeout(()=>{
+      icon.remove();
+    },1000);
+  });
+</script>
   </head>
 
   <body>
